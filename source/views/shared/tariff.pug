@@ -1,8 +1,22 @@
-article
+- var name = "shuttle";
+- var title = "Shuttle bus";
+- var vehicles = ["Higer bus", "Iveco", "Mercedes", "Ford", "Volvo shuttle bus"];
+- var summary = "A seat in the tourist bus to the hotel or airport.";
+- var description = "The cheapest way to go is booking a bus. Thus you will come to your destination with maximum luxury. During the day it’s the most appropriate way of transport. Our shuttle buses meet tourists at the appointed location and transport them to the hotel doors.";
+- var pax = 1;
+- var bags = 2;
+- var delay = 40;
+- var price = 25;
+
+// Tariff
+
+article.tariff-card
   header
-    img(src="images/vehicles/"+name+".png", alt=title)
-    h3= title
-    p= vehicles
+    img(src="assets/images/vehicles/"+name+".png", alt=title)
+    h3.tariff-title= title
+    ul
+      each vehicle in vehicles
+        li= vehicle
   details
     summary= summary
     p= description
@@ -10,7 +24,7 @@ article
     li= pax + " pax"
     li= bags + " bag"
     li
-      time= wait + " min"
-  div
+      time= delay + " min"
+  footer
     span= price + " USD"
     button= "Book transfer"
