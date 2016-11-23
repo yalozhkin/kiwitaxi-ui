@@ -12,26 +12,31 @@ var
   sass = require('gulp-sass'),
   sassGlob = require('gulp-sass-glob'),
   uglify = require('gulp-uglify'),
-  watch = require('gulp-watch');
+  watch = require('gulp-watch'),
+  path = require('path');
 
 // Views
 
 gulp.task('pug', function() {
   gulp.src([
-      'source/views/**/*.pug',
-      '!source/views/**/_*.pug',
-      '!source/views/home/**',
-      '!source/views/layouts/**',
-      '!source/views/shared/**',
+      'source/views/*.pug',
+      '!source/views/index.pug',
+      '!source/views/layouts/*.pug',
+      '!source/views/shared/*.pug'
     ])
     .pipe(plumber())
     .pipe(pug({
       pretty: true,
     }))
+    .pipe(rename(function(file) {
+      file.dirname = path.join(file.dirname, file.basename);
+      file.basename = 'index';
+      file.extname = '.html';
+    }))
     .pipe(gulp.dest('build/'))
     .pipe(browserSync.stream());
 
-  gulp.src('source/views/home/*.pug')
+  gulp.src('source/views/index.pug')
     .pipe(plumber())
     .pipe(pug({
       pretty: true,

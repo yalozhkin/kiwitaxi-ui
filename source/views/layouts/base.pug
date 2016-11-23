@@ -2,23 +2,19 @@ doctype
 html(lang='en')
   head
     title
-
       block title
         |Title
-
-    block meta
-      meta(charset='utf-8')
-      meta(http-equiv='X-UA-Compatible', content='IE=edge')
-      meta(name='viewport', content='width=device-width')
-      meta(name='description', content='')
-      meta(name='viewport', content='width=device-width, initial-scale=1')
-
-    block links
-      link(rel='shortcut icon' href='favicon/favicon.ico' type='image/x-icon')
-      link(rel='apple-touch-icon' href='favicon/apple-touch-icon.png')
-      link(rel='stylesheet' href='assets/styles/main.css')
-
+    include _head-meta
+    include _head-links
   body
+    block header
+      header
+        |Header
 
-    block content
-      |Content
+    block main
+      main
+        |Content
+
+    block footer
+      footer
+        |Footer

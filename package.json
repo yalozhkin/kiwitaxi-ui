@@ -25,6 +25,7 @@
     "imagemin-pngquant": "^5.0.0",
     "node-normalize-scss": "^1.4.0",
     "node-sass": "^3.13.0",
+    "path": "^0.12.7",
     "pump": "^1.0.1"
   },
   "dependencies": {
