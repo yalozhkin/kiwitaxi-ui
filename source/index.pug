@@ -10,7 +10,6 @@ block container
   section.grid
     - var n = 0
     while n < 4
-      .grid_item
-        article.card
-          include components/tariff
-          - n++
+      .grid_item.card
+        include components/tariff
+        - n++
