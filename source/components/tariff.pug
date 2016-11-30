@@ -2,23 +2,24 @@
 
 - var btnCheckout = {"en": "Book transfer", "ru": "Заказать трансфер"}
 
-article.card.tariff-card
-  figure.tariff-card_vehicle
-    img(src="assets/images/vehicles/"+tariff.name+".png", alt=tariff.title)
-    figcaption
-      ul.inline
-        each vehicle in tariff.vehicles
-          li= vehicle
-  .tariff-card_details
+.tariff
+  .tariff_vehicle
+    figure
+      img(src="assets/images/vehicles/"+tariff.name+".png", alt=tariff.title)
+      figcaption
+        ul.inline.comma
+          each vehicle in tariff.vehicles
+            li= vehicle
+  .tariff_details
     h3= tariff.title
     details
       summary= tariff.summary.ru
       p= tariff.description.ru
-    ul.inline
+    ul.inline.dot
       li= tariff.parameters.pax + " pax"
       li= tariff.parameters.bags + " bags"
       li
         time= tariff.parameters.delay + " min"
-  .tariff-card_action
-    span= tariff.price + " USD"
-    button= btnCheckout.ru
+    .tariff_action
+      span= tariff.price + " USD"
+      button= btnCheckout.ru

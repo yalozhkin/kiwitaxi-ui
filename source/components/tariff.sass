@@ -1,5 +1,13 @@
-.tariff-card
-  +radius ($grid)
-  +shadow ($grid-lg, $yellow)
+.tariff
+  background: green
+  overflow: auto
 
-  background: $red
+  &_vehicle
+    background: red
+    +span(4)
+    +gutter($grid inside)
+
+  &_details
+    background: $yellow
+    +span(8)
+    +gutter($grid inside)

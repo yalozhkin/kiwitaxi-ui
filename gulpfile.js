@@ -1,8 +1,10 @@
 var
+  autoprefixer = require('gulp-autoprefixer'),
   browsersync = require('browser-sync'),
   gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
   include = require('gulp-include'),
+  path = require('path'),
   plumber = require('gulp-plumber'),
   pngquant = require('imagemin-pngquant'),
   pug = require('gulp-pug'),
@@ -10,12 +12,11 @@ var
   rename = require('gulp-rename'),
   sass = require('gulp-sass'),
   sassglob = require('gulp-sass-glob'),
-  uglify = require('gulp-uglify'),
-  watch = require('gulp-watch'),
   sourcemaps = require('gulp-sourcemaps'),
-  path = require('path');
+  uglify = require('gulp-uglify'),
+  watch = require('gulp-watch');
 
-// Views
+// Markup
 
 gulp.task('pug', function() {
   gulp.src([
@@ -56,6 +57,10 @@ gulp.task('sass', function() {
       indentedSyntax: true,
       errLogToConsole: true,
       sync: true
+    }))
+    .pipe(autoprefixer({
+      browsers: ['> 1%', 'IE 7'],
+      cascade: false
     }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/assets/styles/'))

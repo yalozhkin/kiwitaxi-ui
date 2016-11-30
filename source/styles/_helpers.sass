@@ -2,6 +2,27 @@
 // Helpers
 //========================================
 
-// Display
+// Inline list
 .inline
   display: inline
+
+  > *
+    display: inline
+
+// Comma-saparated
+.comma
+  > *
+    &::after
+      content: ", "
+
+    &:last-child::after
+      content: ""
+
+// Dots-separated
+.dot
+  > *
+    &::after
+      content: ", "
+
+    &:last-child::after
+      content: ""
