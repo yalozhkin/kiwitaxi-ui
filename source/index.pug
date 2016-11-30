@@ -1,0 +1,15 @@
+extends layouts/base
+
+block title
+  |Заголовок страницы
+
+block container
+
+  h1 Заголовок страницы
+
+  section.grid
+    - var n = 0
+    while n < 4
+      .column
+        include components/tariff
+        - n++

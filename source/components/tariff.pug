@@ -1,0 +1,24 @@
+- var tariff = {"name": "shuttle", "title": "Shuttle bus", "vehicles": ["Higer bus", "Iveco", "Mercedes", "Ford", "Volvo shuttle bus"], "summary": {"en": "A seat in the tourist bus to the hotel or airport.", "ru": "Место в туристическом автобусе до отеля или в аэропорт."}, "description": {"en": "The cheapest way to go is booking a bus. Thus you will come to your destination with maximum luxury. During the day it’s the most appropriate way of transport. Our shuttle buses meet tourists at the appointed location and transport them to the hotel doors.", "ru": "На автобусе из аэропорта вы сможете взять большое количество багажа, странствовать двумя или даже четырьмя семьями. Если вы собираетесь в приключение один – автобус получится экономичным, так как Вам не придется платить за незанятые билеты как на коммерческом автомобиле."}, "parameters": {"pax": 1, "bags": 2, "delay": 40}, "price": 20}
+
+- var btnCheckout = {"en": "Book transfer", "ru": "Заказать трансфер"}
+
+article.card
+  figure.tariff-vehicle
+    img(src="assets/images/vehicles/"+tariff.name+".png", alt=tariff.title)
+    figcaption
+      ul.inline
+        each vehicle in tariff.vehicles
+          li= vehicle
+  .tariff-details
+    h3= tariff.title
+    details
+      summary= tariff.summary.ru
+      p= tariff.description.ru
+    ul.inline
+      li= tariff.parameters.pax + " pax"
+      li= tariff.parameters.bags + " bags"
+      li
+        time= tariff.parameters.delay + " min"
+  .tariff-action
+    span= tariff.price + " USD"
+    button= btnCheckout.ru
