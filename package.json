@@ -26,7 +26,8 @@
     "node-normalize-scss": "^1.4.0",
     "node-sass": "^3.13.0",
     "path": "^0.12.7",
-    "pump": "^1.0.1"
+    "pump": "^1.0.1",
+    "susy": "^2.2.12"
   },
   "dependencies": {
     "gulp": "^3.9.1"

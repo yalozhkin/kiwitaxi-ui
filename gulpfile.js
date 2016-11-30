@@ -50,7 +50,9 @@ gulp.task('sass', function() {
     .pipe(sourcemaps.init())
     .pipe(sassglob())
     .pipe(sass({
-      includePaths: require('node-normalize-scss').includePaths,
+      includePaths: ['node_modules/susy/sass',
+        require('node-normalize-scss').includePaths
+      ],
       indentedSyntax: true,
       errLogToConsole: true,
       sync: true
@@ -99,8 +101,8 @@ gulp.task('server', function() {
 // Default task watch changes and update on server
 
 gulp.task('default', ['server'], function() {
-  gulp.watch(['source/*.pug', 'source/layouts/*.pug', 'components/*.pug'], ['pug']);
-  gulp.watch(['source/styles/**/*.sass', 'components/*.sass'], ['sass']);
+  gulp.watch(['source/*.pug', 'source/layouts/*.pug', 'source/components/*.pug'], ['pug']);
+  gulp.watch(['source/styles/**/*.sass', 'source/components/*.sass'], ['sass']);
   gulp.watch('source/scripts/*.js', ['uglify']);
   gulp.watch('source/images/**/*', ['imagemin']);
 });
