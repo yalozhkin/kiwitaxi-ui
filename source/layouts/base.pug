@@ -1,0 +1,21 @@
+doctype
+html(lang='en')
+
+  head
+    include _head
+    title
+      block title
+        |Title
+  body
+    nav
+      include _navbar
+        block navbar
+    header
+      include _header
+        block header
+    main
+      include _container
+        block container
+    footer
+      include _footer
+        block footer
