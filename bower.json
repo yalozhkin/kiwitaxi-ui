@@ -1,0 +1,24 @@
+{
+  "name": "kiwitaxi-ui",
+  "description": "KiwiTaxi UI",
+  "main": "gulpfile.js",
+  "authors": [
+    "Yaroslav Lozhkin"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "breakpoint-sass": "^2.7.0",
+    "susy": "^2.2.12",
+    "normalize-css": "^5.0.0"
+  },
+  "devDependencies": {
+    "normalize-scss": "normalize.scss#^6.0.0"
+  }
+}

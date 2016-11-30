@@ -51,9 +51,6 @@ gulp.task('sass', function() {
     .pipe(sourcemaps.init())
     .pipe(sassglob())
     .pipe(sass({
-      includePaths: ['node_modules/susy/sass',
-        require('node-normalize-scss').includePaths
-      ],
       indentedSyntax: true,
       errLogToConsole: true,
       sync: true
