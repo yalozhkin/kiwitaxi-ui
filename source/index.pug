@@ -5,11 +5,13 @@ block title
 
 block container
 
-  h1 Заголовок страницы
+  .container
 
-  section.grid
-    - var n = 0
-    while n < 4
-      .grid_item.card
-        include components/tariff
-        - n++
+    h1 Заголовок страницы
+
+    section.grid
+      - var n = 0
+      while n < 4
+        .grid_item.card
+          include components/tariff
+          - n++

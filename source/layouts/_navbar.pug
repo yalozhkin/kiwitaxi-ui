@@ -1,1 +1,11 @@
-|NAVBAR
+- var menu = {'home': {'label': 'Kiwitaxi', 'url': '/'}, 'route': {'label': 'Route', 'url': '/route/'}, 'location': {'label': 'Location', 'url': '/location/'}}
+
+nav
+  ul.inline
+    li
+      a(href= menu.home.url)
+        img(src= path.images + 'kiwitaxi_logo.svg' alt=menu.home.label)
+    li
+      a(href= menu.route.url)= menu.route.label
+    li
+      a(href= menu.location.url)= menu.location.label

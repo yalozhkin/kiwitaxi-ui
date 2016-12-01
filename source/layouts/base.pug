@@ -7,15 +7,17 @@ html(lang='en')
       block title
         |Title
   body
-    nav
+
+    include _vars
+
+    block navbar
       include _navbar
-        block navbar
-    header
+
+    block header
       include _header
-        block header
-    main
+
+    block container
       include _container
-        block container
-    footer
+
+    block footer
       include _footer
-        block footer
