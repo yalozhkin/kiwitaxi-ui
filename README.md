@@ -3,8 +3,9 @@
 Front-end UI components.
 
 ## Dependencies
-* Node.js
+* Node
 * Gulp
+* Bower
 
 Run with gulp:
 

@@ -4,11 +4,30 @@
 
 // Default
 .grid
-  +container()
+  +container
 
   &_item
     +span(6)
 
+  +breakpoint($desktop)
+    &_item
+      +span(4)
+
+
+  +breakpoint($laptop)
+    &_item
+      +span(6)
+
+
+  +breakpoint($tablet)
+    &_item
+      +span(12)
+
+
+  +breakpoint($mobile)
+    &_item
+      +span(12)
+
 // Masonry TO DO
 .masonry
-  +container()
+  +container
