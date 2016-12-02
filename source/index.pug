@@ -1,17 +1,19 @@
 extends layouts/base
 
+block vars
+  -var page = {'title': 'Kiwitaxi components'}
+
 block title
-  |Заголовок страницы
+  = page.title
 
-block container
+block header
+  h1.offset= page.title
 
-  .container
-
-    h1 Заголовок страницы
-
-    section.grid
-      - var n = 0
-      while n < 4
-        .grid_item.card
+block main
+  section.grid
+    - var n = 0
+    while n < 4
+      .grid_column
+        .card
           include components/tariff
           - n++

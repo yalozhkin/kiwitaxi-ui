@@ -1,23 +1,30 @@
+include _paths
+
+block vars
+  - var page = {'title': 'Kiwitaxi UI'}
+
 doctype
 html(lang='en')
 
   head
-    include _head
+    include base/head
+
     title
       block title
         |Title
   body
+    nav
+      block nav
+        include base/nav
 
-    include _vars
+    header
+      block header
+        include base/header
 
-    block navbar
-      include _navbar
+    main
+      block main
+        include base/main
 
-    block header
-      include _header
-
-    block container
-      include _container
-
-    block footer
-      include _footer
+    footer
+      block footer
+        include base/footer
