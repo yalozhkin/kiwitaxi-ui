@@ -103,7 +103,7 @@ gulp.task('server', function() {
 // Default task watch changes and update on server
 
 gulp.task('default', ['server'], function() {
-  gulp.watch(['source/*.pug', 'source/layouts/*.pug', 'source/components/*.pug'], ['pug']);
+  gulp.watch(['source/*.pug', 'source/layouts/**/*.pug', 'source/components/*.pug'], ['pug']);
   gulp.watch(['source/styles/**/*.sass', 'source/components/*.sass'], ['sass']);
   gulp.watch('source/scripts/*.js', ['uglify']);
   gulp.watch('source/images/**/*', ['imagemin']);
