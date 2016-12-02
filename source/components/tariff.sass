@@ -4,8 +4,28 @@
 
   &_vehicle
     +span(4)
-    +gutter($grid inside)
+    +vmargin
+
+    li
+      +inline($comma)
 
   &_details
     +span(8)
-    +gutter($grid inside)
+    padding-left: $grid-lg
+
+    ul
+      +vmargin
+
+    li
+      +inline($dot)
+
+  &_action
+
+    > span
+      +font($font-size-lg)
+      +pull(left)
+
+      line-height: $grid-xl
+
+    > button
+      +pull(right)

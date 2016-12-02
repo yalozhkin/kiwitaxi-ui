@@ -7,7 +7,7 @@
     figure
       img(src= path.images + '/vehicles/' + tariff.name+'.png', alt= tariff.title)
       figcaption
-        ul.inline.comma
+        ul
           each vehicle in tariff.vehicles
             li= vehicle
   .tariff_details
@@ -15,7 +15,7 @@
     details
       summary= tariff.summary.ru
       p= tariff.description.ru
-    ul.inline.dot
+    ul
       li= tariff.parameters.pax + ' pax'
       li= tariff.parameters.bags + ' bags'
       li
