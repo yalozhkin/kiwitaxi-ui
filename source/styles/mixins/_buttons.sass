@@ -2,29 +2,33 @@
 // Buttons
 //========================================
 
-@function label-color($color)
-  @if (lightness($color) < 53%)
-    @return $white
-  @else
-    @return $base
-
-=button ($color: $base-subtle, $size: $font-size)
+=button ($color: $primary, $size: $font-size)
   +border
-  +radius($size/4)
-  +font-text
   +gradient($color)
+  +font
+  +radius($size/4)
   +transition
-  color: label-color($color)
+  +zero
+
+  border-top-color: lighten($color, 10%)
+  border-bottom-color: darken($color, 10%)
+  color: inverse-color($color)
   cursor: pointer
   font-size: $size
   padding: $size/2 $size
 
-  &:active
-    +shadow(inset, $size, $black)
+  &:hover
+    +gradient(darken($color, 5%))
+    +shadow
 
-  &:hover,
-  &:focus
-    +gradient(lighten($color, 5%))
+    border-color: (darken($color, 5%))
+    border-bottom-color: darken($color, 12.5%)
+    border-top-color: darken($color, 2.5%)
+
+  &:active
+    +shadow(inset)
+
+    border-color: (darken($color, 15%))
 
   &:focus
     outline: 0

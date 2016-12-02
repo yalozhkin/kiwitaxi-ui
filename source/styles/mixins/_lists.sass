@@ -1,0 +1,22 @@
+//
+// Lists
+//========================================
+
+$dot: '•'
+$comma: ','
+
+=inline ($symbol: null)
+  list-style: none
+  display: inline
+
+  &::after
+    content: $symbol
+    +align(center)
+
+    @if $symbol != $comma
+      margin: 0 $grid-xs 0 $grid-sm
+    @else
+      width: 0
+
+  &:last-child::after
+    content: ''

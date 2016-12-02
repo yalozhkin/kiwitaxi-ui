@@ -6,9 +6,9 @@
   box-sizing: border-box
 
 body
-  background: $base-subtle
-  color: $base
-  +font-text
+  +theme
+  +font
+  +zero
 
 button
   +button
@@ -16,21 +16,25 @@ button
 h1,
 h2,
 h3
-  font-family: $font-display
-  font-weight: lighter
   +vmargin
 
+  font-family: $font-display
+  font-weight: lighter
+
 img
-  width: 100%
   +zero
+
+  width: 100%
 
 figure
   +zero
 
 figcaption
+  +vmargin
   +fine-print
-  +text-center
+  +align(center)
 
-ul,
+ul
+  +zero
 p
   +vmargin
