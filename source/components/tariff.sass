@@ -1,31 +1,35 @@
 .tariff
-  padding: $grid-lg
-  overflow: auto
+  +container
 
   &_vehicle
-    +span(4)
-    +vmargin
+    +span(3)
+    +vpadding(1,0)
 
     li
       +inline($comma)
 
   &_details
-    +span(8)
-    padding-left: $grid-lg
+    +span(5)
+    +prefix(1/2)
+
+    h3
+      +vmargin(0,1)
 
     ul
       +vmargin
+      +fine-print
 
-    li
-      +inline($dot)
+      li
+        +inline($dot)
 
   &_action
+    +span(4)
+    +align(center)
+    +vpadding(3,0)
+    +radius
 
-    > span
-      +font($font-size-lg)
-      +pull(left)
+    span
+      +font($font-size-xl)
 
-      line-height: $grid-xl
-
-    > button
-      +pull(right)
+    button
+      +vmargin(2)
