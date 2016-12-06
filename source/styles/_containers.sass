@@ -3,4 +3,17 @@
 //========================================
 
 .offset
-  +gutter()
+  +container
+  +gutters(2)
+
+  +breakpoint($desktop)
+    +gutters(1)
+
+  +breakpoint($laptop)
+    +gutters(2)
+
+  +breakpoint($tablet)
+    +gutters(4)
+
+  +breakpoint($mobile)
+    +gutters(6)

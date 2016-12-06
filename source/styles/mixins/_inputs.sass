@@ -1,0 +1,20 @@
+//
+// Buttons
+//========================================
+
+=input ($color: $white, $size: $font-size)
+  +border($base-lighter)
+  +gradient($color)
+  +font
+  +radius($size/6)
+  +transition(0.2s)
+  +zero
+
+  color: inverse-color($color)
+  font-size: $size
+  padding: $size/2 $size/2
+
+  &:focus
+    border: solid 1px lighten($green, 40%)
+    box-shadow: 0 0 4px lighten($green, 40%)
+    outline: 0

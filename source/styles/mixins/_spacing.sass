@@ -6,5 +6,24 @@
   margin: 0
   padding: 0
 
-=vmargin ($top: $grid, $bottom: $grid)
-  margin: $top 0 $bottom 0
+// Paddings
+
+=padding ($one: 1)
+  padding: $one*$grid
+
+=vpadding ($one: 1, $two: 1)
+  padding: $one*$grid 0 $two*$grid 0
+
+=hpadding ($one: 1, $two: 1)
+  padding: $one*$grid 0 $two*$grid 0
+
+// Margins
+
+=margin ($one: 1)
+  margin: $one*$grid
+
+=vmargin ($one: 1, $two: 1)
+  margin: $one*$grid 0 $two*$grid 0
+
+=hmargin ($one: 1, $two: 1)
+  margin: $one*$grid 0 $two*$grid 0
