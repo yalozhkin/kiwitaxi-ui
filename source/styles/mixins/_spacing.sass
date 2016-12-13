@@ -8,22 +8,22 @@
 
 // Paddings
 
-=padding ($one: 1)
-  padding: $one*$grid
+=padding ($one: 1, $two: 1)
+  padding: $one*$grid $two*$grid
 
 =vpadding ($one: 1, $two: 1)
   padding: $one*$grid 0 $two*$grid 0
 
 =hpadding ($one: 1, $two: 1)
-  padding: $one*$grid 0 $two*$grid 0
+  padding: 0 $two*$grid 0 $one*$grid
 
 // Margins
 
-=margin ($one: 1)
-  margin: $one*$grid
+=margin ($one: 1, $two: 1)
+  margin: $one*$grid $two*$grid
 
 =vmargin ($one: 1, $two: 1)
   margin: $one*$grid 0 $two*$grid 0
 
 =hmargin ($one: 1, $two: 1)
-  margin: $one*$grid 0 $two*$grid 0
+  margin: 0 $two*$grid 0 $one*$grid

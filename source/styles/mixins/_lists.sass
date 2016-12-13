@@ -5,18 +5,20 @@
 $dot: '•'
 $comma: ','
 
-=inline ($symbol: null)
+=inline($symbol: null)
   list-style: none
   display: inline
 
-  &::after
-    content: $symbol
-    +align(center)
+  > li
+    display: inline-flex
 
-    @if $symbol != $comma
-      margin: 0 $grid-xs 0 $grid-sm
-    @else
-      width: 0
+    &::after
+      content: $symbol
+      +align(center)
 
-  &:last-child::after
-    content: ''
+      @if $symbol != null
+        @if $symbol != $comma
+          margin: 0 $grid-xs 0 $grid-sm
+
+    &:last-child::after
+      content: ''

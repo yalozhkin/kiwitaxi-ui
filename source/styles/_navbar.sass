@@ -4,9 +4,22 @@
 
 .navbar
   +theme ($base)
+  +container
+  +gutter
+  +valign
+  +padding(2,4)
 
   &_logo
-    display: inline-block
+    +pull(left)
 
-    > img
+    > a > img
       height: $grid-xl
+      width: auto
+
+  &_menu
+    +inline
+    +hmargin(3)
+
+    > li > a
+      +padding(0,2)
+      line-height: $grid-xl

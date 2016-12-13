@@ -31,5 +31,6 @@
     "type": "git",
     "url": "https://yalozhkin@bitbucket.org/yalozhkin/kiwitaxi-ui.git",
     "private": true
-  }
+  },
+  "dependencies": {}
 }
