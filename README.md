@@ -7,9 +7,25 @@ Front-end UI components.
 * Gulp
 * Bower
 
-Run with gulp:
+Run local server with gulp:
 
 ```
 $ gulp
 
 ```
+
+## Validate and Test
+
+### Performance
+
+* [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
+* [Google Mobile-friendly Test](https://search.google.com/search-console/mobile-friendly)
+
+##### Discuss
+
+* [Google AMP Validator](https://validator.ampproject.org)
+
+### SEO
+
+* [Woorank](https://woorank.com)
+* [Varvy](https://varvy.com)
