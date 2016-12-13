@@ -1,23 +1,20 @@
 extends layouts/base
 
-block vars
-  -var page = {'title': 'Kiwitaxi', 'subtitle': 'Taxi transfers from airports and cities Book online wherever you are', 'section': {'tariffs': 'Transfer tariffs avialable'}}
-
 block title
-  = page.title
+  = page.home.title
 
 block header
   section.hero
     .offset
-      h1= page.title
-      p.lead= page.subtitle
+      h1= page.home.title
+      p.lead= page.home.subtitle
 
     .offset
       include components/search
 
 block main
   section.offset
-    h2= page.section.tariffs
+    h2= page.home.section.tariffs
     .grid
       - var n = 0
         while n < 6

@@ -1,7 +1,5 @@
-include _paths
-
-block vars
-  - var page = {'title': 'Kiwitaxi UI'}
+block data
+  include _data
 
 doctype
 html(lang='en')
@@ -22,6 +20,9 @@ html(lang='en')
         include base/header
 
     main
+      block breadcrumb
+        include base/breadcrumb
+
       block main
         include base/main
 
