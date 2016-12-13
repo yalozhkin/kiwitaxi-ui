@@ -80,7 +80,7 @@ gulp.task('imagemin', function() {
 
 gulp.task('uglify', function(cb) {
   pump([
-      gulp.src('scripts/*.js')
+      gulp.src('source/scripts/*.js')
       .pipe(uglify()),
       gulp.dest('build/assets/scripts/')
     ],
