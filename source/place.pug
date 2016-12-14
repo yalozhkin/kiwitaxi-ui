@@ -1,0 +1,37 @@
+extends layouts/base
+
+block title
+  = page.location.title
+
+block header
+  section
+    .offset
+      include components/search
+
+block main
+  section
+    h2= page.location.section.tariffs
+    p
+      |Duration 2h
+      span
+        a Show the return transfer
+      span
+        a Conditions
+
+    .grid
+      - var n = 0
+        while n < 10
+          .column
+            .card
+              include components/tariff
+              - n++
+  section
+    h3 Customer reviews of Kiwitaxi
+
+    .grid
+      - var n = 0
+        while n < 3
+          .column
+            .card
+              include components/testimonial
+              - n++

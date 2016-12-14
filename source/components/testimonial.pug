@@ -1,0 +1,10 @@
+figure.testimonial
+  blockquote.testimonial_content
+    = testimonial.content
+    p= testimonial.score
+  footer.testimonial_details
+    cite= testimonial.author
+    ul.inline
+      li= testimonial.transfer.from + " → " + testimonial.transfer.to
+      li= testimonial.transfer.date
+      li= testimonial.transfer.class
