@@ -1,0 +1,20 @@
+.offer
+  .offer_vehicle
+    figure
+      img(src= path.images+"cars/"+vehicle.image+".png", alt= offer.title)
+      figcaption
+        ul
+          li= vehicle.cars
+  .offer_details
+    h3= offer.title
+    details
+      summary= vehicle.details
+      p= vehicle.description
+    ul
+      li= vehicle.capacity.pax+" pax"
+      li= vehicle.capacity.bags+" bags"
+      li
+        time= offer.delay+" min"
+  .offer_action
+    span= offer.price+" USD"
+    button Book transfer

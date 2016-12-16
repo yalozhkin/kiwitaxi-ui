@@ -1,0 +1,9 @@
+//
+// Inverse color
+//========================================
+
+@function inverse-color($color)
+  @if (lightness($color) < 53%)
+    @return $white
+  @else
+    @return $base

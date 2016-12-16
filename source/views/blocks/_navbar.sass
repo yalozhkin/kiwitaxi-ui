@@ -1,0 +1,25 @@
+//
+// Navbar
+//========================================
+
+.navbar
+  +theme ($base)
+  +container
+  +gutter
+  +valign
+  +padding(2,4)
+
+  &_logo
+    +pull(left)
+
+    > a > img
+      height: $grid*2
+      width: auto
+
+  &_menu
+    +inline
+    +hmargin(3)
+
+    > li > a
+      +padding(0,2)
+      line-height: $grid*2
