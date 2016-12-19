@@ -5,9 +5,12 @@ var
   concat = require('gulp-concat'),
   filter = require('gulp-filter'),
   gulp = require('gulp'),
+  gulpif = require('gulp-if'),
+  htmlmin = require('gulp-htmlmin'),
   imagemin = require('gulp-imagemin'),
   imageminWebp = require('imagemin-webp'),
   include = require('gulp-include'),
+  lazypipe = require('lazypipe'),
   mainBowerFiles = require('main-bower-files'),
   newer = require('gulp-newer'),
   path = require('path'),
@@ -40,17 +43,22 @@ var paths = {
   }
 };
 
-var sink = clone.sink();
-
 // Views
+
+var viewsTasks = lazypipe()
+  .pipe(plumber)
+  .pipe(pug, {
+    pretty: true
+  })
+  .pipe(htmlmin, {
+    collapseWhitespace: true
+  });
+
 gulp.task('pug', function() {
   gulp.src([
       paths.src.views + '!(home)*.pug',
     ])
-    .pipe(plumber())
-    .pipe(pug({
-      pretty: true
-    }))
+    .pipe(viewsTasks())
     .pipe(rename(function(file) {
       file.dirname = path.join(file.dirname, file.basename);
       file.basename = 'index';
@@ -60,10 +68,7 @@ gulp.task('pug', function() {
     .pipe(browsersync.stream());
 
   gulp.src(paths.src.views + 'home.pug')
-    .pipe(plumber())
-    .pipe(pug({
-      pretty: true
-    }))
+    .pipe(viewsTasks())
     .pipe(rename(function(file) {
       file.basename = 'index';
       file.extname = '.html';
@@ -93,9 +98,12 @@ gulp.task('sass', function() {
 });
 
 // Images
-gulp.task('images', function() {
+
+var sink = clone.sink();
+
+gulp.task('img', function() {
   gulp.src(paths.src.images + '**/*')
-    .pipe(newer(paths.dest.images))
+    .pipe(newer(paths.dest.images + '**/*'))
     .pipe(plumber())
     .pipe(sink)
     .pipe(webp())
@@ -119,7 +127,7 @@ gulp.task('js', function() {
 });
 
 // Build
-gulp.task('build', ['pug', 'sass', 'js', 'images']);
+gulp.task('build', ['pug', 'sass', 'js', 'img']);
 
 // Browsersync
 gulp.task('server', function() {
@@ -136,5 +144,5 @@ gulp.task('default', ['server'], function() {
   gulp.watch([paths.src.views + '**/*.pug', paths.src.data + '*.pug'], ['pug']);
   gulp.watch([paths.src.styles + '**/**/*.sass', paths.src.views + 'blocks/*.sass'], ['sass']);
   gulp.watch(paths.src.scripts + '*.js', ['js']);
-  gulp.watch(paths.src.images + '**/*', ['images']);
+  gulp.watch(paths.src.images + '**/*', ['img']);
 });
