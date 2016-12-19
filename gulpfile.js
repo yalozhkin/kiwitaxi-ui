@@ -99,9 +99,9 @@ gulp.task('sass', function() {
 
 // Images
 
-var sink = clone.sink();
-
 gulp.task('img', function() {
+  var sink = clone.sink();
+
   gulp.src(paths.src.images + '**/*')
     .pipe(newer(paths.dest.images + '**/*'))
     .pipe(plumber())
@@ -144,5 +144,5 @@ gulp.task('default', ['server'], function() {
   gulp.watch([paths.src.views + '**/*.pug', paths.src.data + '*.pug'], ['pug']);
   gulp.watch([paths.src.styles + '**/**/*.sass', paths.src.views + 'blocks/*.sass'], ['sass']);
   gulp.watch(paths.src.scripts + '*.js', ['js']);
-  gulp.watch(paths.src.images + '**/*', ['img']);
+  gulp.watch(paths.src.images + '**/*', ['img', 'responsive']);
 });
