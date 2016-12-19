@@ -1,12 +1,15 @@
 .offer
   .offer_vehicle
     figure
-      img(src= path.images+"cars/"+vehicle.image+".png", alt= offer.title)
+      picture
+        source(srcset= path.images+"cars/"+vehicle.image+".webp" type="image/webp")
+        source(srcset= path.images+"cars/"+vehicle.image+".png" type="image/jpeg")
+        img(src= path.images+"cars/"+vehicle.image+".png" alt= vehicle.name)
       figcaption
         ul
           li= vehicle.cars
   .offer_details
-    h3= offer.title
+    h3= vehicle.name
     details
       summary= vehicle.details
       p= vehicle.description

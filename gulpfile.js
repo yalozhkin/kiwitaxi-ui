@@ -1,9 +1,15 @@
 var
   autoprefixer = require('gulp-autoprefixer'),
   browsersync = require('browser-sync'),
+  clone = require('gulp-clone'),
+  concat = require('gulp-concat'),
+  filter = require('gulp-filter'),
   gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
+  imageminWebp = require('imagemin-webp'),
   include = require('gulp-include'),
+  mainBowerFiles = require('main-bower-files'),
+  newer = require('gulp-newer'),
   path = require('path'),
   plumber = require('gulp-plumber'),
   pngquant = require('imagemin-pngquant'),
@@ -14,7 +20,8 @@ var
   sassglob = require('gulp-sass-glob'),
   sourcemaps = require('gulp-sourcemaps'),
   uglify = require('gulp-uglify'),
-  watch = require('gulp-watch');
+  watch = require('gulp-watch'),
+  webp = require('gulp-webp');
 
 var paths = {
   src: {
@@ -32,6 +39,8 @@ var paths = {
     styles: './build/assets/styles/',
   }
 };
+
+var sink = clone.sink();
 
 // Views
 gulp.task('pug', function() {
@@ -84,29 +93,33 @@ gulp.task('sass', function() {
 });
 
 // Images
-gulp.task('imagemin', function() {
+gulp.task('images', function() {
   gulp.src(paths.src.images + '**/*')
+    .pipe(newer(paths.dest.images))
     .pipe(plumber())
+    .pipe(sink)
+    .pipe(webp())
+    .pipe(sink.tap())
     .pipe(imagemin({
+      use: [pngquant(), imageminWebp({
+        quality: 50
+      })],
       progressive: true,
-      use: [pngquant()]
+      optimizationLevel: 3
     }))
     .pipe(gulp.dest(paths.dest.images));
 });
 
 // Scripts
-gulp.task('uglify', function(cb) {
-  pump([
-      gulp.src(paths.src.scripts + '*.js')
-      .pipe(uglify()),
-      gulp.dest(paths.dest.scripts)
-    ],
-    cb
-  );
+
+gulp.task('js', function() {
+  return gulp.src(mainBowerFiles('**/*.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.dest.scripts));
 });
 
 // Build
-gulp.task('build', ['pug', 'sass', 'uglify', 'imagemin']);
+gulp.task('build', ['pug', 'sass', 'js', 'images']);
 
 // Browsersync
 gulp.task('server', function() {
@@ -122,6 +135,6 @@ gulp.task('server', function() {
 gulp.task('default', ['server'], function() {
   gulp.watch([paths.src.views + '**/*.pug', paths.src.data + '*.pug'], ['pug']);
   gulp.watch([paths.src.styles + '**/**/*.sass', paths.src.views + 'blocks/*.sass'], ['sass']);
-  gulp.watch(paths.src.scripts + '*.js', ['uglify']);
-  gulp.watch(paths.src.images + '**/*', ['imagemin']);
+  gulp.watch(paths.src.scripts + '*.js', ['js']);
+  gulp.watch(paths.src.images + '**/*', ['images']);
 });
