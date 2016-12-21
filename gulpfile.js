@@ -1,11 +1,14 @@
 var
   autoprefixer = require('gulp-autoprefixer'),
   browsersync = require('browser-sync'),
+  cleanCSS = require('gulp-clean-css'),
   clone = require('gulp-clone'),
   concat = require('gulp-concat'),
   filter = require('gulp-filter'),
   gulp = require('gulp'),
+  gzipMiddleware = require('connect-gzip-static')('./build'),
   gulpif = require('gulp-if'),
+  gzip = require('gulp-gzip'),
   htmlmin = require('gulp-htmlmin'),
   imagemin = require('gulp-imagemin'),
   imageminWebp = require('imagemin-webp'),
@@ -46,6 +49,8 @@ var paths = {
 // Views
 
 var viewsTasks = lazypipe()
+
+  .pipe(plumber)
   .pipe(pug, {
     pretty: true
   })
@@ -57,23 +62,23 @@ gulp.task('pug', function() {
   gulp.src([
       paths.src.views + '!(home)*.pug',
     ])
-    .pipe(plumber())
     .pipe(viewsTasks())
     .pipe(rename(function(file) {
       file.dirname = path.join(file.dirname, file.basename);
       file.basename = 'index';
       file.extname = '.html';
     }))
+    .pipe(gzip())
     .pipe(gulp.dest(paths.dest.root))
     .pipe(browsersync.stream());
 
   gulp.src(paths.src.views + 'home.pug')
-    .pipe(plumber())
     .pipe(viewsTasks())
     .pipe(rename(function(file) {
       file.basename = 'index';
       file.extname = '.html';
     }))
+    .pipe(gzip())
     .pipe(gulp.dest(paths.dest.root))
     .pipe(browsersync.stream());
 });
@@ -90,9 +95,13 @@ gulp.task('sass', function() {
       sync: true
     }))
     .pipe(autoprefixer({
-      browsers: ['> 1%', 'IE 7'],
+      browsers: ['> 1%', 'IE 8'],
       cascade: false
     }))
+    .pipe(cleanCSS({
+      compatibility: 'ie8'
+    }))
+    .pipe(gzip())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest.styles))
     .pipe(browsersync.stream());
@@ -110,12 +119,16 @@ gulp.task('img', function() {
     .pipe(webp())
     .pipe(sink.tap())
     .pipe(imagemin({
-      use: [pngquant(), imageminWebp({
-        quality: 50
-      })],
+      use: [
+        pngquant(),
+        imageminWebp({
+          quality: 60
+        })
+      ],
       progressive: true,
       optimizationLevel: 3
     }))
+    .pipe(gzip())
     .pipe(gulp.dest(paths.dest.images));
 });
 
@@ -124,6 +137,7 @@ gulp.task('img', function() {
 gulp.task('js', function() {
   return gulp.src(mainBowerFiles('**/*.js'))
     .pipe(uglify())
+    .pipe(gzip())
     .pipe(gulp.dest(paths.dest.scripts));
 });
 
@@ -131,12 +145,23 @@ gulp.task('js', function() {
 gulp.task('build', ['pug', 'sass', 'js', 'img']);
 
 // Browsersync
+
 gulp.task('server', function() {
   browsersync.init({
     server: {
       baseDir: paths.dest.root
     },
-    open: false
+    open: false,
+    files: [
+      paths.dest.root + '**/*.html',
+      paths.dest.styles + '*.css',
+      paths.dest.scripts + '*.js',
+      paths.dest.images + '**/*',
+    ]
+  }, function(err, bs) {
+    bs.addMiddleware('*', gzipMiddleware, {
+      override: true
+    });
   });
 });
 
