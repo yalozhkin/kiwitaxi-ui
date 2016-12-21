@@ -9,6 +9,7 @@ Front-end UI components.
 * [Node](//nodejs.org)
 * [Gulp](//gulpjs.com)
 * [Bower](//bower.io)
+* [Libvips](https://github.com/jcupitt/libvips) for image resizing
 
 
 ### Set up

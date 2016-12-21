@@ -1,29 +1,31 @@
 var
   autoprefixer = require('gulp-autoprefixer'),
-  browsersync = require('browser-sync'),
+  browserSync = require('browser-sync').create(),
   cleanCSS = require('gulp-clean-css'),
   clone = require('gulp-clone'),
   concat = require('gulp-concat'),
   filter = require('gulp-filter'),
   gulp = require('gulp'),
-  gzipMiddleware = require('connect-gzip-static')('./build'),
   gulpif = require('gulp-if'),
   gzip = require('gulp-gzip'),
+  gzipMiddleware = require('connect-gzip-static')('./build'),
   htmlmin = require('gulp-htmlmin'),
   imagemin = require('gulp-imagemin'),
-  imageminWebp = require('imagemin-webp'),
-  imageminSvgo = require('imagemin-svgo'),
   imageminMozjpeg = require('imagemin-mozjpeg'),
+  imageminOptipng = require('imagemin-optipng'),
+  imageminPngquant = require('imagemin-pngquant'),
+  imageminSvgo = require('imagemin-svgo'),
+  imageminWebp = require('imagemin-webp'),
   include = require('gulp-include'),
   lazypipe = require('lazypipe'),
   mainBowerFiles = require('main-bower-files'),
   newer = require('gulp-newer'),
   path = require('path'),
   plumber = require('gulp-plumber'),
-  pngquant = require('imagemin-pngquant'),
   pug = require('gulp-pug'),
   pump = require('pump'),
   rename = require('gulp-rename'),
+  responsive = require('gulp-responsive'),
   sass = require('gulp-sass'),
   sassglob = require('gulp-sass-glob'),
   sourcemaps = require('gulp-sourcemaps'),
@@ -71,7 +73,7 @@ gulp.task('pug', function() {
     }))
     .pipe(gzip())
     .pipe(gulp.dest(paths.dest.root))
-    .pipe(browsersync.stream());
+    .pipe(browserSync.stream());
 
   gulp.src(paths.src.views + 'home.pug')
     .pipe(viewsTasks())
@@ -81,7 +83,7 @@ gulp.task('pug', function() {
     }))
     .pipe(gzip())
     .pipe(gulp.dest(paths.dest.root))
-    .pipe(browsersync.stream());
+    .pipe(browserSync.stream());
 });
 
 // Styles
@@ -106,19 +108,57 @@ gulp.task('sass', function() {
     .pipe(gzip())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest.styles))
-    .pipe(browsersync.stream());
+    .pipe(browserSync.stream());
 });
 
 // Images
 
 var rasterOpt = lazypipe()
+  .pipe(responsive, {
+    'favicon.png': [{
+      width: 32,
+      rename: {
+        suffix: '@2x'
+      }
+    }, {
+      width: 16
+    }],
+    'cars/*.png': [{
+      width: 600,
+      withoutEnlargement: false,
+      rename: {
+        suffix: '@2x'
+      }
+    }, {
+      width: 300
+    }],
+    'covers/*.png': [{
+      width: 1200,
+      format: 'jpeg',
+      rename: {
+        suffix: '@2x',
+        extname: '.jpg'
+      }
+    }, {
+      width: 800,
+      format: 'jpeg',
+      rename: {
+        extname: '.jpg'
+      }
+    }]
+  }, {
+    errorOnEnlargement: false,
+    errorOnUnusedConfig: false,
+    errorOnUnusedImage: false,
+    passThroughUnused: true,
+    withMetadata: false
+  })
   .pipe(imagemin, {
     use: [
-      pngquant(),
+      imageminPngquant(),
       imageminWebp(),
       imageminMozjpeg()
-    ],
-    lossless: true
+    ]
   });
 
 var vectorOpt = lazypipe()
@@ -127,22 +167,21 @@ var vectorOpt = lazypipe()
       plugins: [{
         removeViewBox: false
       }]
-    }),
-    lossless: true
+    })
   })
   .pipe(gzip);
 
 gulp.task('img', function() {
   var sink = clone.sink();
-
-  gulp.src(paths.src.images + '**/*')
+  gulp.src(paths.src.images + '**/*.{svg,png,jpg}')
+    .pipe(newer(paths.dest.images + '**/*'))
     .pipe(plumber())
+    .pipe(gulpif('*.svg', vectorOpt(), rasterOpt()))
     .pipe(sink)
     .pipe(webp())
     .pipe(sink.tap())
-    .pipe(newer(paths.dest.images + '**/*'))
-    .pipe(gulpif('*.svg', vectorOpt(), rasterOpt()))
-    .pipe(gulp.dest(paths.dest.images));
+    .pipe(gulp.dest(paths.dest.images))
+    .pipe(browserSync.stream());
 });
 
 // Scripts
@@ -151,34 +190,32 @@ gulp.task('js', function() {
   gulp.src(mainBowerFiles('**/*.js'))
     .pipe(uglify())
     .pipe(gzip())
-    .pipe(gulp.dest(paths.dest.scripts));
+    .pipe(gulp.dest(paths.dest.scripts))
+    .pipe(browserSync.stream());
 });
 
 // Build
+
 gulp.task('build', ['pug', 'sass', 'js', 'img']);
 
-// Browsersync
+// Server
 
 gulp.task('server', function() {
-  browsersync.init({
-    server: {
-      baseDir: paths.dest.root
+  browserSync.init({
+      server: {
+        baseDir: paths.dest.root
+      },
+      open: false,
     },
-    open: false,
-    files: [
-      paths.dest.root + '**/*.html',
-      paths.dest.styles + '*.css',
-      paths.dest.scripts + '*.js',
-      paths.dest.images + '**/*',
-    ]
-  }, function(err, bs) {
-    bs.addMiddleware('*', gzipMiddleware, {
-      override: true
+    function(err, bs) {
+      bs.addMiddleware('*', gzipMiddleware, {
+        override: true
+      });
     });
-  });
 });
 
-// Default task
+// Default
+
 gulp.task('default', ['server'], function() {
   gulp.watch([paths.src.views + '**/*.pug', paths.src.data + '*.pug'], ['pug']);
   gulp.watch([paths.src.styles + '**/**/*.sass', paths.src.views + 'blocks/*.sass'], ['sass']);
