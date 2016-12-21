@@ -46,7 +46,6 @@ var paths = {
 // Views
 
 var viewsTasks = lazypipe()
-  .pipe(plumber)
   .pipe(pug, {
     pretty: true
   })
@@ -58,6 +57,7 @@ gulp.task('pug', function() {
   gulp.src([
       paths.src.views + '!(home)*.pug',
     ])
+    .pipe(plumber())
     .pipe(viewsTasks())
     .pipe(rename(function(file) {
       file.dirname = path.join(file.dirname, file.basename);
@@ -68,6 +68,7 @@ gulp.task('pug', function() {
     .pipe(browsersync.stream());
 
   gulp.src(paths.src.views + 'home.pug')
+    .pipe(plumber())
     .pipe(viewsTasks())
     .pipe(rename(function(file) {
       file.basename = 'index';

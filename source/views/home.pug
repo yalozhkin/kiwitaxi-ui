@@ -4,16 +4,16 @@ block title
   |Home title
 
 block heading
-  h1 Product title
-  p.lead Subtitle
+  h1 Taxi transfers from airports and cities
+  p.lead Book online wherever you are
 
 block content
-  section.offset
+  section
     h2 Transfers title
     .grid
-      - var n = 0
-        while n < 6
-          .column
-            .card
-              include blocks/offer
-              - n++
+    - var n = 0
+      while n < 6
+        .column
+          .card
+            include blocks/offer
+            - n++

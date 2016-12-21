@@ -18,18 +18,27 @@ block content
 
     .grid
       - var n = 0
-        while n < 10
+        while n < 4
           .column
             .card
               include blocks/offer
               - n++
   section
     h3 Customer reviews of Kiwitaxi
-
     .grid
       - var n = 0
         while n < 3
           .column
             .card
               include blocks/review
+              - n++
+
+  section
+    h3 Transfers from location
+    .grid
+      - var n = 0
+        while n < 6
+          .column
+            .card
+              include blocks/place
               - n++
