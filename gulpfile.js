@@ -12,6 +12,8 @@ var
   htmlmin = require('gulp-htmlmin'),
   imagemin = require('gulp-imagemin'),
   imageminWebp = require('imagemin-webp'),
+  imageminSvgo = require('imagemin-svgo'),
+  imageminMozjpeg = require('imagemin-mozjpeg'),
   include = require('gulp-include'),
   lazypipe = require('lazypipe'),
   mainBowerFiles = require('main-bower-files'),
@@ -49,7 +51,6 @@ var paths = {
 // Views
 
 var viewsTasks = lazypipe()
-
   .pipe(plumber)
   .pipe(pug, {
     pretty: true
@@ -85,8 +86,9 @@ gulp.task('pug', function() {
 
 // Styles
 gulp.task('sass', function() {
-  gulp.src(paths.src.styles + 'main.sass')
+  gulp.src(paths.src.styles + '*.sass')
     .pipe(plumber())
+    .pipe(newer(paths.dest.styles))
     .pipe(sourcemaps.init())
     .pipe(sassglob())
     .pipe(sass({
@@ -109,33 +111,44 @@ gulp.task('sass', function() {
 
 // Images
 
+var rasterOpt = lazypipe()
+  .pipe(imagemin, {
+    use: [
+      pngquant(),
+      imageminWebp(),
+      imageminMozjpeg()
+    ],
+    lossless: true
+  });
+
+var vectorOpt = lazypipe()
+  .pipe(imagemin, {
+    use: imageminSvgo({
+      plugins: [{
+        removeViewBox: false
+      }]
+    }),
+    lossless: true
+  })
+  .pipe(gzip);
+
 gulp.task('img', function() {
   var sink = clone.sink();
 
   gulp.src(paths.src.images + '**/*')
-    .pipe(newer(paths.dest.images + '**/*'))
     .pipe(plumber())
     .pipe(sink)
     .pipe(webp())
     .pipe(sink.tap())
-    .pipe(imagemin({
-      use: [
-        pngquant(),
-        imageminWebp({
-          quality: 60
-        })
-      ],
-      progressive: true,
-      optimizationLevel: 3
-    }))
-    .pipe(gzip())
+    .pipe(newer(paths.dest.images + '**/*'))
+    .pipe(gulpif('*.svg', vectorOpt(), rasterOpt()))
     .pipe(gulp.dest(paths.dest.images));
 });
 
 // Scripts
 
 gulp.task('js', function() {
-  return gulp.src(mainBowerFiles('**/*.js'))
+  gulp.src(mainBowerFiles('**/*.js'))
     .pipe(uglify())
     .pipe(gzip())
     .pipe(gulp.dest(paths.dest.scripts));
