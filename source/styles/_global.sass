@@ -1,0 +1,109 @@
+//
+// Global
+//========================================
+
+*
+  box-sizing: border-box
+
+// Layout
+
+body
+  +theme
+  +font
+  +zero
+
+footer,
+header,
+main,
+section
+  +container
+  +gutter
+
+// Content
+
+a
+  +transition
+  color: $blue
+  text-decoration: none
+
+  &:hover
+    text-decoration: underline
+
+h1,
+h2,
+h3
+  +vmargin(2,1)
+  font-family: $font-display
+  font-weight: lighter
+
+img
+  +zero
+  width: 100%
+  vertical-align: top
+
+figure
+  +zero
+
+figcaption
+  +vmargin
+  +fine-print
+  +align(center)
+
+p
+  +vmargin
+
+ul
+  +zero
+
+// Forms
+
+button
+  +border(transparent)
+  +gradient
+  +font
+  +corner
+  +transition(0.1s)
+  +zero
+
+  box-shadow: inset 0 -2px 0 darken($primary, 7.5%)
+  border-top-color: lighten($primary, 10%)
+  border-bottom-color: darken($primary, 10%)
+  color: inverse-color($primary)
+  cursor: pointer
+  font-size: $grid
+  padding: $grid/2 $grid
+
+  &:hover
+    +gradient(darken($primary, 5%))
+    +shadow
+
+    box-shadow: inset 0 -2px 0 darken($black, 10%)
+    border-color: darken($primary, 5%)
+    border-bottom-color: darken($primary, 12.5%)
+    border-top-color: darken($primary, 2.5%)
+
+  &:active
+    +shadow(inset)
+
+    box-shadow: inset 0 2px 2px darken($primary, 10%)
+    border-color: (darken($primary, 15%))
+
+  &:focus
+    outline: 0
+
+input
+  +border($base-lighter)
+  +gradient($primary)
+  +font
+  +corner($grid/6)
+  +transition(0.2s)
+  +zero
+
+  color: inverse-color($primary)
+  font-size: $grid
+  padding: $grid/2 $grid/2
+
+  &:focus
+    border: solid 1px lighten($green, 40%)
+    box-shadow: 0 0 4px lighten($green, 40%)
+    outline: 0

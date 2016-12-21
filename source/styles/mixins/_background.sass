@@ -3,3 +3,6 @@
 =gradient($color: $base-subtle)
   background-color: $color
   background-image: linear-gradient(lighten($color, 10%), $color)
+
+=fill($color: red, $tint: 5)
+  background-color: lighten($color, $tint)
