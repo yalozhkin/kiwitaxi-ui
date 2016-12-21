@@ -1,0 +1,9 @@
+.navbar
+  .navbar_logo
+    a(href= path.root)
+      img(src= path.images+"logo/kiwitaxi_logo_light.svg" alt= KiwiTaxi)
+
+  ul.navbar_menu
+    each item in menu
+      li
+        a(href= path.root + item.name)= item.label

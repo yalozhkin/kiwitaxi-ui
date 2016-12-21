@@ -1,0 +1,48 @@
+block data
+  include ../../data/all
+
+doctype
+html(lang="en")
+  meta(charset="utf-8")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge")
+  meta(name="description", content="")
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+  meta(name="viewport", content="width=device-width")
+
+  link(rel="shortcut icon" href=path.images+"favicon.ico" type="image/x-icon")
+  link(rel="apple-touch-icon" href=path.images+"apple-touch-icon.webp")
+  link(rel="stylesheet" href=path.styles+"main.css")
+
+  //- script(src=path.scripts + "modernizr-custom.js")
+
+  title
+    block title
+      |Title
+  body
+    header
+      block navbar
+        nav
+          include ../blocks/navbar
+      block search
+        section
+          include ../blocks/search
+      block breadcrumb
+        section
+          include ../blocks/breadcrumb
+
+    main
+      block heading
+        |Title
+
+      block content
+        |Main content
+
+      block extras
+        |Extra content
+
+      block seo
+        |SEO content
+
+    footer
+      block footer
+        include ../blocks/footer

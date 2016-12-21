@@ -1,0 +1,33 @@
+.offer
+  +container
+
+  &_vehicle
+    +span(3)
+    +vpadding(1,0)
+
+    ul
+      +inline($comma)
+
+  &_details
+    +span(5)
+    +prefix(1/2)
+
+    h3
+      +vmargin(0,1)
+
+    ul
+      +vmargin
+      +fine-print
+      +inline($dot)
+
+  &_action
+    +span(4)
+    +align(center)
+    +vpadding(3,0)
+    +corner
+
+    span
+      +font($size*2)
+
+    button
+      +vmargin(2)

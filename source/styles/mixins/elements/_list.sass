@@ -1,0 +1,28 @@
+//
+// Lists
+//========================================
+
+// Mixins
+
+=inline($symbol: null)
+  list-style: none
+  display: inline
+
+  > li
+    display: inline-flex
+
+    &::after
+      content: $symbol
+      +align(center)
+
+      @if $symbol != null
+        @if $symbol != $comma
+          margin: 0 $grid/4 0 $grid/2
+
+    &:last-child::after
+      content: ""
+
+// Styles
+
+ul
+  +zero
