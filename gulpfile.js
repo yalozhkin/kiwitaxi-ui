@@ -218,7 +218,7 @@ gulp.task('server', function() {
 
 gulp.task('default', ['server'], function() {
   gulp.watch([paths.src.views + '**/*.pug', paths.src.data + '*.pug'], ['pug']);
-  gulp.watch([paths.src.styles + '**/**/*.sass', paths.src.views + 'blocks/*.sass'], ['sass']);
+  gulp.watch([paths.src.styles + '**/**/*.sass', paths.src.views + 'components/*.sass'], ['sass']);
   gulp.watch(paths.src.scripts + '*.js', ['js']);
-  gulp.watch(paths.src.images + '**/*', ['img', 'responsive']);
+  gulp.watch(paths.src.images + '**/*', ['img']);
 });

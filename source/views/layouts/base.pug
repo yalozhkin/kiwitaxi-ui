@@ -10,10 +10,9 @@ html(lang="en")
   meta(name="viewport", content="width=device-width")
 
   link(rel="shortcut icon" href=path.images+"favicon.ico" type="image/x-icon")
-  link(rel="apple-touch-icon" href=path.images+"apple-touch-icon.webp")
-  link(rel="stylesheet" href=path.styles+"main.css")
-
-  //- script(src=path.scripts + "modernizr-custom.js")
+  link(rel="apple-touch-icon" href=path.images+"apple-touch-icon.png")
+  link(rel="stylesheet" href=path.styles+"main.css" async)
+  link(rel="stylesheet" href=path.styles+"components.css" async)
 
   title
     block title
@@ -22,13 +21,13 @@ html(lang="en")
     header
       block navbar
         nav
-          include ../blocks/navbar
+          include ../components/navbar
       block search
         section
-          include ../blocks/search
+          include ../components/search
       block breadcrumb
         section
-          include ../blocks/breadcrumb
+          include ../components/breadcrumb
 
     main
       block heading
@@ -45,4 +44,4 @@ html(lang="en")
 
     footer
       block footer
-        include ../blocks/footer
+        include ../components/footer
