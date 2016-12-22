@@ -52,20 +52,15 @@ var paths = {
 
 // Views
 
-var viewsTasks = lazypipe()
-  .pipe(plumber)
-  .pipe(pug, {
-    pretty: true
-  })
-  .pipe(htmlmin, {
-    collapseWhitespace: true
-  });
-
 gulp.task('pug', function() {
-  gulp.src([
-      paths.src.views + '*.pug',
-    ])
-    .pipe(viewsTasks())
+  gulp.src(paths.src.views + '*.pug')
+    .pipe(plumber())
+    .pipe(pug({
+      pretty: true
+    }))
+    .pipe(htmlmin({
+      collapseWhitespace: true
+    }))
     .pipe(rename(function(file) {
       if (file.basename !== 'home') {
         file.dirname = path.join(file.dirname, file.basename);
