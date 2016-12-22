@@ -1,6 +1,7 @@
 var
   autoprefixer = require('gulp-autoprefixer'),
   browserSync = require('browser-sync').create(),
+  cach = require('gulp-cached'),
   cleanCSS = require('gulp-clean-css'),
   clone = require('gulp-clone'),
   concat = require('gulp-concat'),
@@ -19,7 +20,6 @@ var
   include = require('gulp-include'),
   lazypipe = require('lazypipe'),
   mainBowerFiles = require('main-bower-files'),
-  newer = require('gulp-newer'),
   path = require('path'),
   plumber = require('gulp-plumber'),
   pug = require('gulp-pug'),
@@ -55,6 +55,7 @@ var paths = {
 gulp.task('pug', function() {
   gulp.src(paths.src.views + '*.pug')
     .pipe(plumber())
+    .pipe(cach('cached'))
     .pipe(pug({
       pretty: true
     }))
@@ -76,7 +77,7 @@ gulp.task('pug', function() {
 gulp.task('sass', function() {
   gulp.src(paths.src.styles + '*.sass')
     .pipe(plumber())
-    .pipe(newer(paths.dest.styles))
+    .pipe(cach('cached'))
     .pipe(sourcemaps.init())
     .pipe(sassglob())
     .pipe(sass({
@@ -159,8 +160,8 @@ var vectorOpt = lazypipe()
 gulp.task('img', function() {
   var sink = clone.sink();
   gulp.src(paths.src.images + '**/*.{svg,png,jpg}')
-    .pipe(newer(paths.dest.images + '**/*'))
     .pipe(plumber())
+    .pipe(cach('cached'))
     .pipe(gulpif('*.svg', vectorOpt(), rasterOpt()))
     .pipe(sink)
     .pipe(webp())
@@ -174,6 +175,8 @@ gulp.task('img', function() {
 
 gulp.task('js', function() {
   gulp.src(mainBowerFiles('**/*.js'))
+    .pipe(plumber())
+    .pipe(cach('cached'))
     .pipe(uglify())
     // .pipe(gzip())
     .pipe(gulp.dest(paths.dest.scripts))
