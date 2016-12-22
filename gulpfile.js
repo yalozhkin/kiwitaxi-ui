@@ -53,9 +53,8 @@ var paths = {
 // Views
 
 gulp.task('pug', function() {
-  gulp.src(paths.src.views + '*.pug')
+  gulp.src(paths.src.views + '**/*.pug')
     .pipe(plumber())
-    .pipe(cach('cached'))
     .pipe(pug({
       pretty: true
     }))
@@ -77,7 +76,6 @@ gulp.task('pug', function() {
 gulp.task('sass', function() {
   gulp.src(paths.src.styles + '*.sass')
     .pipe(plumber())
-    .pipe(cach('cached'))
     .pipe(sourcemaps.init())
     .pipe(sassglob())
     .pipe(sass({
