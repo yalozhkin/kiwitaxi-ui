@@ -63,23 +63,14 @@ var viewsTasks = lazypipe()
 
 gulp.task('pug', function() {
   gulp.src([
-      paths.src.views + '!(home)*.pug',
+      paths.src.views + '*.pug',
     ])
     .pipe(viewsTasks())
     .pipe(rename(function(file) {
-      file.dirname = path.join(file.dirname, file.basename);
+      if (file.basename !== 'home') {
+        file.dirname = path.join(file.dirname, file.basename);
+      }
       file.basename = 'index';
-      file.extname = '.html';
-    }))
-    .pipe(gzip())
-    .pipe(gulp.dest(paths.dest.root))
-    .pipe(browserSync.stream());
-
-  gulp.src(paths.src.views + 'home.pug')
-    .pipe(viewsTasks())
-    .pipe(rename(function(file) {
-      file.basename = 'index';
-      file.extname = '.html';
     }))
     .pipe(gzip())
     .pipe(gulp.dest(paths.dest.root))

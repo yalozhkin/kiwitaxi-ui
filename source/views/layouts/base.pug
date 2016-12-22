@@ -1,5 +1,13 @@
 block data
-  include ../../data/all
+-
+  var path = {
+    "root": "/",
+    "images": "/assets/images/",
+    "styles": "/assets/styles/",
+    "scripts": "/assets/scripts/"
+  }
+
+include ../../data/all
 
 doctype
 html(lang="en")
@@ -13,7 +21,7 @@ html(lang="en")
   link(rel="apple-touch-icon" href=path.images+"apple-touch-icon.png")
 
   link(rel="stylesheet" href=path.styles+"print.css" media="print")
-  link(rel="stylesheet" href=path.styles+"mobile.css" media="max-width: 40em")
+  link(rel="stylesheet" href=path.styles+"mobile.css" media="(min-width: 0, max-width: 40em)")
 
   link(rel="stylesheet" href=path.styles+"main.css")
   link(rel="stylesheet" href=path.styles+"components.css")
