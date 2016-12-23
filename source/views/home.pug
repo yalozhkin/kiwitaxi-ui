@@ -1,18 +1,63 @@
-extends layouts/base
+extends layouts/_base
 
 block title
-  |Home title
+  = home.title
 
-block heading
-  h1 Taxi transfers from airports and cities
-  p.lead Book online wherever you are from from
+block hero
+  article
+    h1= home.hero.title
+    p.lead= home.hero.lead
 
-block content
-  section
-    h2 Transfers title
+block main
+  article
+    h2= home.hiw.title
+    a(href= menu.about.url)= global.links.learnMore
+
     .grid
+      each item in home.hiw.steps
+        figure
+          picture
+            source(srcset= path.images.pics+"hiw_"+item.name+".webp" type="image/webp")
+            source(srcset= path.images.pics+"hiw_"+item.name+".png" type="image/jpeg")
+            img(src= path.images.pics+"hiw_"+item.name+".png" alt= item.title)
+          figcaption
+            p= item.description
+
+block secondary
+  article
+    h2= home.feedback.title
+    a(href= menu.feedback.url)= global.links.showAll
+
+    .grid
+      +review
+
+block extra
+  .container
+    h3= home.stats.title
+    a(href= menu.feedback.url)= global.links.learnMore
+
+    .grid
+      each item in home.stats.cases
+        figure
+          img(src= path.images.icons+"stats_"+item.name+".svg" alt= item.title)
+          figcaption
+            big= item.number
+            p= item.title
+
+block seo
+  .container
+    h3= home.seo.title
+    p= home.seo.content
+
+  .container
+    h4 Geography
+    ul
+      each item in global.countries
+        li= item
+
+    h4 Airports
+    ul
       - var n = 0
-      while n < 6
-        .card
-          include components/offer
-            - n++
+      while n < 20
+        - n++
+        li= place.name

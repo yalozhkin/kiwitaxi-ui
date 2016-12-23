@@ -1,0 +1,11 @@
+mixin review
+  figure.review
+    blockquote.review_content
+      p= review.content
+      p= review.score
+    footer.review_details
+      cite= client.name
+      ul.inline
+        li= place.name+" → "+place.name
+        li= booking.pickup.date
+        li= vehicle.name

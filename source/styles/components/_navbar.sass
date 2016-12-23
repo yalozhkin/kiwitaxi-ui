@@ -3,7 +3,7 @@
 //========================================
 
 .navbar
-  +theme ($base)
+  +fill($base)
   +container
   +gutter
   +valign
@@ -13,7 +13,7 @@
     +pull(left)
 
     > a > img
-      height: $grid*2
+      height: $grid*3
       width: auto
 
   &_menu
@@ -22,4 +22,3 @@
 
     > li > a
       +padding(0,2)
-      line-height: $grid*2

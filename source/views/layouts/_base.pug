@@ -1,0 +1,99 @@
+block data
+  -
+    var path = {
+      "root": "/",
+      "images": {
+        "root": "/assets/images/",
+        "cars": "/assets/images/cars/",
+        "covers": "/assets/images/covers/",
+        "icons": "/assets/images/icons/",
+        "pics": "/assets/images/pics/",
+      },
+      "styles": "/assets/styles/",
+      "scripts": "/assets/scripts/"
+    }
+  include ../../data/all
+  include ../components/all
+
+doctype
+html(lang="en")
+  head
+    //- Global Google Tag Manager script injection
+    script
+      include ../../scripts/vendors/gtm_start.js
+
+    //- Global head settings
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="description", content="")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="viewport", content="width=device-width")
+    link(rel="shortcut icon" href=path.images+"favicon.ico" type="image/x-icon")
+    link(rel="apple-touch-icon" href=path.images+"apple-touch-icon.png")
+
+    //- Global critical styles injection
+    //- TODO
+
+    //- Media related styles
+    link(rel="stylesheet" href= path.styles+"print.css" media="print")
+    link(rel="stylesheet" href= path.styles+"mobile.css" media="(min-width: 0, max-width: 40em)")
+
+    //- Global styles
+    link(rel="stylesheet" href= path.styles+"main.css")
+    link(rel="stylesheet" href= path.styles+"components.css")
+
+  title
+    block title
+      //- Page title
+      |No country for old men
+  body
+    header
+      nav
+        block navbar
+          //- Global navbar
+          include ../partials/_navbar.pug
+
+      section
+        block hero
+          //- Hero content
+
+      section
+        block search
+          //- Global search
+          include ../partials/_search.pug
+
+      section
+        block breadcrumb
+          //- Global breadcrum
+          include ../partials/_breadcrumb.pug
+  main
+    block heading
+      //- Main header
+
+    block main
+      //- Main content
+
+  aside
+    block aside
+      //- Sidebar content
+
+  section
+    block secondary
+      //- Secondary content
+
+  section
+    block extra
+      //- Extra content
+
+  section
+    block seo
+      //- SEO content
+
+  footer
+    block footer
+      //- Global footer
+      include ../partials/_footer.pug
+
+  noscript
+    //- Global Google Tag Manager iframe injection
+    include ../vendors/_gtm_end.pug

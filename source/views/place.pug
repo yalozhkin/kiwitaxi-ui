@@ -1,4 +1,4 @@
-extends layouts/base
+extends layouts/_base
 
 block title
   |Order title
@@ -6,7 +6,7 @@ block title
 block heading
   h1 Order content
 
-block content
+block main
   section
     h2 Transfers title
     p
@@ -21,7 +21,7 @@ block content
         while n < 4
           .column
             .card
-              include components/offer
+              +offer
               - n++
   section
     h3 Customer reviews of Kiwitaxi
@@ -30,7 +30,7 @@ block content
         while n < 3
           .column
             .card
-              include components/review
+              +review
               - n++
 
   section
@@ -40,5 +40,5 @@ block content
         while n < 6
           .column
             .card
-              include components/place
+              +place
               - n++
