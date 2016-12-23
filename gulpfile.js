@@ -53,7 +53,7 @@ var paths = {
 // Views
 
 gulp.task('pug', function() {
-  gulp.src(paths.src.views + '**/*.pug')
+  gulp.src(paths.src.views + '*.pug')
     .pipe(plumber())
     .pipe(pug({
       pretty: true
@@ -117,6 +117,15 @@ var rasterOpt = lazypipe()
     }, {
       width: 300
     }],
+    'pics/*.png': [{
+      width: 600,
+      withoutEnlargement: false,
+      rename: {
+        suffix: '@2x'
+      }
+    }, {
+      width: 300
+    }],
     'covers/*.png': [{
       width: 1200,
       format: 'jpeg',
@@ -132,7 +141,7 @@ var rasterOpt = lazypipe()
       }
     }]
   }, {
-    errorOnEnlargement: false,
+    errorOnEnlargement: true,
     errorOnUnusedConfig: false,
     errorOnUnusedImage: false,
     passThroughUnused: true,
@@ -153,18 +162,26 @@ var vectorOpt = lazypipe()
         removeViewBox: false
       }]
     })
+    // .pipe(gzip)
   });
 
-gulp.task('img', function() {
+gulp.task('webp', function() {
   var sink = clone.sink();
+  gulp.src(paths.src.images + '**/*.{png,jpg}')
+    .pipe(plumber())
+    .pipe(cach('cached'))
+    .pipe(sink)
+    .pipe(webp())
+    .pipe(sink.tap())
+    .pipe(gulp.dest(paths.dest.images))
+    .pipe(browserSync.stream());
+});
+
+gulp.task('img', function() {
   gulp.src(paths.src.images + '**/*.{svg,png,jpg}')
     .pipe(plumber())
     .pipe(cach('cached'))
     .pipe(gulpif('*.svg', vectorOpt(), rasterOpt()))
-    .pipe(sink)
-    .pipe(webp())
-    .pipe(sink.tap())
-    // .pipe(gzip)
     .pipe(gulp.dest(paths.dest.images))
     .pipe(browserSync.stream());
 });
@@ -204,8 +221,8 @@ gulp.task('server', function() {
 // Default
 
 gulp.task('default', ['server'], function() {
-  gulp.watch([paths.src.views + '**/*.pug', paths.src.data + '*.pug'], ['pug']);
-  gulp.watch([paths.src.styles + '**/**/*.sass', paths.src.views + 'components/*.sass'], ['sass']);
-  gulp.watch(paths.src.scripts + '*.js', ['js']);
-  gulp.watch(paths.src.images + '**/*', ['img']);
+  gulp.watch(paths.src.views + '**/*.pug', ['pug']);
+  gulp.watch(paths.src.styles + '**/*.sass', ['sass']);
+  gulp.watch(paths.src.scripts + '**/*.js', ['js']);
+  gulp.watch(paths.src.images + '**/*.{png,jpg,svg}', ['img', 'webp']);
 });
