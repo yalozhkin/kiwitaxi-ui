@@ -1,5 +1,11 @@
-mixin place
+mixin place-routes
   .place
-    a
+    a(href= path.root+menu.place.url)
+      h4= place.name
+      p 25 destinations
+
+mixin place-offer
+  .place
+    a(href= path.root+menu.place.url)
       h4= place.name
       p= offer.price

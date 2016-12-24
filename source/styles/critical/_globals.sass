@@ -34,7 +34,7 @@ h3
 
 img
   +zero
-  width: 100%
+  object-fit: fill
   vertical-align: top
 
 figure
@@ -64,7 +64,7 @@ button
   box-shadow: inset 0 -2px 0 darken($primary, 7.5%)
   border-top-color: lighten($primary, 10%)
   border-bottom-color: darken($primary, 10%)
-  color: inverse-color($primary)
+  color: contrast-color($primary)
   cursor: pointer
   font-size: $grid
   padding: $grid/2 $grid
@@ -95,7 +95,7 @@ input
   +transition(0.2s)
   +zero
 
-  color: inverse-color($primary)
+  color: contrast-color($primary)
   font-size: $grid
   padding: $grid/2 $grid/2
 

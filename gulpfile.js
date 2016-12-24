@@ -222,7 +222,7 @@ gulp.task('server', function() {
 
 gulp.task('default', ['server'], function() {
   gulp.watch(paths.src.views + '**/*.pug', ['pug']);
-  gulp.watch(paths.src.styles + '**/*.sass', ['sass']);
+  gulp.watch(paths.src.styles + '**/**/*.sass', ['sass']);
   gulp.watch(paths.src.scripts + '**/*.js', ['js']);
   gulp.watch(paths.src.images + '**/*.{png,jpg,svg}', ['img', 'webp']);
 });

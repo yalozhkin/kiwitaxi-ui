@@ -1,7 +1,29 @@
 extends layouts/_base
 
 block title
-  |Country title
+  = country.title
 
-block heading
-  h1 Country title
+block hero
+  article
+    h1= country.hero.title
+    p.lead= country.hero.lead
+
+block main
+  article
+    h2= global.titles.transfersIn + country.name
+
+    .grid
+      -var n = 0
+      while n < 8
+        -n++
+        +place-routes
+
+block aside
+  article
+    h2= country.seo.title
+    p= country.seo.content
+
+block support
+  .container
+    h3= support.case.title
+    button(href= menu.support.url)= support.case.cta

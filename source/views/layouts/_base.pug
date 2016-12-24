@@ -34,13 +34,15 @@ html(lang="en")
     //- Global critical styles injection
     //- TODO
 
-    //- Media related styles
+    //- Global critical styles
+    link(rel="stylesheet" href= path.styles+"critical.css")
+
+    //- Product scope styles
+    //- link(rel="stylesheet" href= path.styles+"components.css")
+
+    //- Media styles
     link(rel="stylesheet" href= path.styles+"print.css" media="print")
     link(rel="stylesheet" href= path.styles+"mobile.css" media="(min-width: 0, max-width: 40em)")
-
-    //- Global styles
-    link(rel="stylesheet" href= path.styles+"main.css")
-    link(rel="stylesheet" href= path.styles+"components.css")
 
   title
     block title
@@ -76,6 +78,10 @@ html(lang="en")
   aside
     block aside
       //- Sidebar content
+
+  section
+    block support
+      //- Support content
 
   section
     block secondary
