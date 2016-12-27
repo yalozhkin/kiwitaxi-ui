@@ -28,8 +28,8 @@ html(lang="en")
     meta(name="description", content="")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     meta(name="viewport", content="width=device-width")
-    link(rel="shortcut icon" href=path.images+"favicon.ico" type="image/x-icon")
-    link(rel="apple-touch-icon" href=path.images+"apple-touch-icon.png")
+    link(rel="shortcut icon" href=path.images.root+"favicon.ico" type="image/x-icon")
+    link(rel="apple-touch-icon" href=path.images.root+"apple-touch-icon.png")
 
     //- Global critical styles injection
     //- TODO
@@ -43,6 +43,9 @@ html(lang="en")
     //- Media styles
     link(rel="stylesheet" href= path.styles+"print.css" media="print")
     link(rel="stylesheet" href= path.styles+"mobile.css" media="(min-width: 0, max-width: 40em)")
+
+    //- Global custom font
+    script(type="text/javascript" src="//fast.fonts.net/jsapi/6f1ebcb2-73ec-46dc-8d64-5d15b4373dec.js" async)
 
   title
     block title

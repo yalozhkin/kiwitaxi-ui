@@ -1,0 +1,8 @@
+.footer
+  .footer_logo
+    a(href= path.root)
+      img(src= path.images.root+"kiwitaxi_logo_light.svg" alt="KiwiTaxi")
+
+  ul.footer_menu
+    each item in menu
+      li: a(href= path.root+item.url)= item.label

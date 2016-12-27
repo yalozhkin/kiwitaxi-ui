@@ -1,44 +1,28 @@
 extends layouts/_base
 
 block title
-  |Order title
+  = place.title
 
 block heading
-  h1 Order content
+  h1= place.title
 
 block main
-  section
-    h2 Transfers title
-    p
-      |Duration 2h
-      span
-        a Show the return transfer
-      span
-        a Conditions
+  .container
+    .grid
+      - var n = 0
+      while n < 4
+        .card
+          +offer-small
+          - n++
 
+block secondary
+  .container
     .grid
       - var n = 0
-        while n < 4
-          .column
-            .card
-              +offer
-              - n++
-  section
-    h3 Customer reviews of Kiwitaxi
-    .grid
-      - var n = 0
-        while n < 3
-          .column
-            .card
-              +review
-              - n++
+      while n < 4
+        .card
+          +activity
+          - n++
 
-  section
-    h3 Transfers from location
-    .grid
-      - var n = 0
-        while n < 6
-          .column
-            .card
-              +place-offer
-              - n++
+block seo
+  |SEO

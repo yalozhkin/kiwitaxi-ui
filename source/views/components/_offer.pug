@@ -1,4 +1,4 @@
-mixin offer
+mixin offer-full
   .offer
     .offer_vehicle
       figure
@@ -20,3 +20,16 @@ mixin offer
     .offer_action
       span= offer.price+" USD"
       button Book transfer
+
+mixin offer-small
+  .offer
+    .offer_vehicle
+      figure
+        picture
+          source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")
+          source(srcset= path.images.cars+vehicle.image+".png" type="image/jpeg")
+          img(src= path.images.cars+vehicle.image+".png" alt= vehicle.name)
+        figcaption
+          ul: li= vehicle.cars
+    .offer_details
+      h3= vehicle.name

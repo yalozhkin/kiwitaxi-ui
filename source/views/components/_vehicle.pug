@@ -1,0 +1,15 @@
+mixin vehicle
+  .vehicle
+    .vehicle_img
+      figure
+        picture
+          source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")
+          source(srcset= path.images.cars+vehicle.image+".png" type="image/jpeg")
+          img(src= path.images.cars+vehicle.image+".png" alt= vehicle.name)
+        figcaption
+          ul: li= vehicle.cars
+    .vehicle_details
+      h3= vehicle.name
+    .offer_action
+      span= offer.price+" USD"
+      button Book transfer
