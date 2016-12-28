@@ -1,17 +1,19 @@
 // Mixin
 
 =button($color: $base-subtle)
-  +border($color)
-  +corner
-  +font
+  +border
   +fill($color)
-  +padding(1)
+  +font
+  +corner
+  +padding(1,2)
+
+  color: contrast-color($color)
 
   &:hover
     +fill($color: lighten($color, 10%))
 
   &:active
-    +shadow(inset)
+    +shadow(1,inset)
 
   &:focus
     outline: 0
@@ -23,3 +25,11 @@ button
 
 .btn-primary
   +button($primary)
+
+.btn-green
+  +button($green)
+
+.btn-ghost
+  +button
+  background-color: transparent
+  color: $base

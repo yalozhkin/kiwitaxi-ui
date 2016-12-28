@@ -1,15 +1,14 @@
 //- Big offer card with call to action
-mixin offer-full
-  .offer
-    .offer_vehicle
-      figure
-        picture
-          source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")
-          source(srcset= path.images.cars+vehicle.image+".png" type="image/jpeg")
-          img(src= path.images.cars+vehicle.image+".png" alt= vehicle.name)
-        figcaption
-          ul: li= vehicle.cars
-    .offer_details
+mixin offer
+  article.offer
+    figure.offer__vehicle
+      picture
+        source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")
+        source(srcset= path.images.cars+vehicle.image+".png" type="image/jpeg")
+        img(src= path.images.cars+vehicle.image+".png" alt= vehicle.name)
+      figcaption
+        ul: li= vehicle.cars
+    .offer__details
       h3= vehicle.name
       details
         summary= vehicle.details
@@ -18,20 +17,19 @@ mixin offer-full
         li= vehicle.capacity.pax+" pax"
         li= vehicle.capacity.bags+" bags"
         li: time= offer.delay+" min"
-    .offer_action
-      span= offer.price+" USD"
+    .offer__action
+      span= offer.price+global.currencies.usd
       button Book transfer
 
 //- Small offer card
 mixin offer-small
   .offer-small
-    .vehicle
-      h3= vehicle.name
-
-      figure
-        picture
-          source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")
-          source(srcset= path.images.cars+vehicle.image+".png" type="image/jpeg")
-          img(src= path.images.cars+vehicle.image+".png" alt= vehicle.name)
-        figcaption
-          p= offer.price
+    figure
+      picture.offer__pic
+        source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")
+        source(srcset= path.images.cars+vehicle.image+".png" type="image/jpeg")
+        img(src= path.images.cars+vehicle.image+".png" alt= vehicle.name)
+      figcaption
+        .offer__vehicle= vehicle.name
+        .offer__price from
+          = " " + offer.price + " " + global.currencies.usd

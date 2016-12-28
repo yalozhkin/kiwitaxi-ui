@@ -1,0 +1,25 @@
+.search-full
+  +corner(2)
+  +shadow(2)
+  +align(center)
+  +fill($primary)
+
+  > form
+    +height(6)
+    +padding(1,2)
+    +vmargin(2,2)
+
+    > *
+      +align(left)
+      +hmargin(1/8)
+      display: inline-block
+
+    > button
+      +height(3)
+
+    > label
+      +font(1, 500, $base)
+
+      > input
+        +height(3)
+        +border

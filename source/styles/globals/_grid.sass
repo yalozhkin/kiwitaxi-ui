@@ -1,0 +1,38 @@
+//
+// Grid
+//========================================
+
+.grid
+  +squish(-1/6)
+
+  &.comfort
+    > *
+      +span(4)
+
+      +breakpoint($desktop)
+        +span(3)
+
+      +breakpoint($laptop)
+        +span(4)
+
+      +breakpoint($tablet)
+        +span(6)
+
+      +breakpoint($mobile)
+        +span(12)
+
+  &.tight
+    > *
+      +span(3)
+
+      +breakpoint($desktop)
+        +span(2)
+
+      +breakpoint($laptop)
+        +span(2)
+
+      +breakpoint($tablet)
+        +span(3)
+
+      +breakpoint($mobile)
+        +span(6)

@@ -1,10 +1,12 @@
 mixin activity
-  .activity_item
-    h5
-      |Константин
-      |&nbsp;в&nbsp;
-      |Бангкок Аэропорт Суварнабхуми
-    ul
-      li 3 ч назад
-      li Микроавтобус
-      li 1670 ₽
+  .activity
+    h5.activity__title
+      = client.name
+      span to
+      = place.name
+
+    ul.activity__details
+      //- TODO: Calculate hours/days ago
+      li: time(datetime= booking.pickup.time + booking.pickup.date) 2 days ago
+      li= vehicle.name
+      li= offer.price + " " + global.currencies.usd

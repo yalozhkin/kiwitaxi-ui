@@ -4,11 +4,11 @@
 
 // Mixins
 
-=font ($size: $size, $family: $font-text)
+=font ($size: 2, $color: $base, $weight: normal, $family: $font-text)
+  font-size: $font-size * $size/4 + $grid
+  font-weight: $weight
   font-family: $family
-  font-size: $size
-  line-height: $size*1.25
-
-=fine-print($size: $size/2, $color: $base-light)
-  font-size: $size
   color: $color
+
+=leading ($size: 1)
+  line-height: $leading * $size + $grid/2

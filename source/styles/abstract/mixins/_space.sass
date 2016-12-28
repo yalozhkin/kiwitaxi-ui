@@ -12,10 +12,12 @@
   padding: $one*$grid $two*$grid
 
 =vpadding ($one: 1, $two: 1)
-  padding: $one*$grid 0 $two*$grid 0
+  padding-top: $one*$grid
+  padding-bottom: $two*$grid
 
 =hpadding ($one: 1, $two: 1)
-  padding: 0 $two*$grid 0 $one*$grid
+  padding-right: $two*$grid
+  padding-left: $one*$grid
 
 // Margins
 
@@ -23,7 +25,9 @@
   margin: $one*$grid $two*$grid
 
 =vmargin ($one: 1, $two: 1)
-  margin: $one*$grid 0 $two*$grid 0
+  margin-top: $one*$grid
+  margin-bottom: $two*$grid
 
 =hmargin ($one: 1, $two: 1)
-  margin: 0 $two*$grid 0 $one*$grid
+  margin-right: $two*$grid
+  margin-left: $one*$grid

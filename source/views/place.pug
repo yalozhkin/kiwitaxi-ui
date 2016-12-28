@@ -6,23 +6,31 @@ block title
 block heading
   h1= place.title
 
+block append search
+  .grid.tight
+    - var n = 0
+    while n < 6
+      .card.is-clickable
+        +offer-small
+        - n++
+
 block main
-  .container
-    .grid
-      - var n = 0
-      while n < 4
-        .card
-          +offer-small
-          - n++
+  h2= place.activity.title
+  .grid.comfort
+    - var n = 0
+    while n < 6
+      .card.is-clickable
+        +place
+        - n++
 
 block secondary
-  .container
-    .grid
-      - var n = 0
-      while n < 4
-        .card
-          +activity
-          - n++
+  h3= place.activity.title
+  .grid.comfort
+    - var n = 0
+    while n < 3
+      .card.gray
+        +activity
+        - n++
 
 block seo
-  |SEO
+  +seo(place.seo.title, place.seo.content)

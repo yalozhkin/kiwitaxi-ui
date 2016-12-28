@@ -9,12 +9,14 @@
 
 body
   +fill
-  +font
   +zero
+  +font
 
-article
+main,
+section,
   +container
   +gutter
+  margin: 0 auto
 
 // Content
 
@@ -28,15 +30,39 @@ a
 
 h1,
 h2,
-h3
-  +vmargin(2,1)
+h3,
   font-family: $font-display
   font-weight: lighter
+
+h1
+  +font(6)
+  +vmargin(4,3)
+
+h2
+  +font(5)
+  +vmargin(12,4)
+
+h3
+  +font(4)
+  +vmargin(6,3)
+
+h4
+  +font(3)
+  +vmargin(4,2)
+
+h5
+  +font(2)
+  +vmargin(3,1)
+
+  &:first-of-type
+    +vmargin(1,1)
 
 img,
 picture
   +zero
-  object-fit: cover
+  height: auto
+  max-width: 100%
+  object-fit: scale-down
   vertical-align: top
 
 figure
@@ -44,11 +70,11 @@ figure
 
 figcaption
   +vmargin
-  +fine-print
+  +font
   +align(center)
 
 p
-  +vmargin
+  +vmargin(2,4)
 
 ul
   +zero

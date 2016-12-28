@@ -47,10 +47,10 @@ html(lang="en")
     //- Global custom font
     script(type="text/javascript" src="//fast.fonts.net/jsapi/6f1ebcb2-73ec-46dc-8d64-5d15b4373dec.js" async)
 
-  title
-    block title
-      //- Page title
-      |No country for old men
+    title
+      block title
+        //- Page title
+        |No country for old men
   body
     header
       nav
@@ -63,46 +63,46 @@ html(lang="en")
           //- Hero content
 
       section
-        block search
-          //- Global search
-          +search-full
-
-      section
         block breadcrumb
           //- Global breadcrum
           include ../partials/_breadcrumb.pug
-  main
-    block heading
+
+    main
+      block heading
       //- Main header
 
-    block main
-      //- Main content
+      block search
+        //- Global search
+        include ../partials/_search.pug
 
-  aside
-    block aside
-      //- Sidebar content
+      block main
+      //- Main content  
 
-  section
-    block support
-      //- Support content
+    aside
+      block aside
+        //- Sidebar content
 
-  section
-    block secondary
-      //- Secondary content
+    section
+      block support
+        //- Support content
 
-  section
-    block extra
-      //- Extra content
+    section
+      block secondary
+        //- Secondary content
 
-  section
-    block seo
-      //- SEO content
+    section
+      block extra
+        //- Extra content
 
-  footer
-    block footer
-      //- Global footer
-      include ../partials/_footer.pug
+    section
+      block seo
+        //- SEO content
 
-  noscript
-    //- Global Google Tag Manager iframe injection
-    include ../vendors/_gtm_end.pug
+    footer
+      block footer
+        //- Global footer
+        include ../partials/_footer.pug
+
+    noscript
+      //- Global Google Tag Manager iframe injection
+      include ../vendors/_gtm_end.pug

@@ -1,14 +1,22 @@
 .offer
-  +container
-
-  &_vehicle
-    +span(3)
-    +vpadding(1,0)
+  &__pic
+    > img
+      +height(4)
 
     ul
       +inline($comma)
 
-  &_details
+  &__vehicle
+
+  &__price
+    +font(1,$base-light)
+    +vmargin(1/2)
+
+    > sup
+      +font(1,$base-light)
+      +hpadding(1/4)
+
+  &__details
     +span(5)
     +prefix(1/2)
 
@@ -17,17 +25,19 @@
 
     ul
       +vmargin
-      +fine-print
+      +font(1)
       +inline($dot)
 
-  &_action
+  &__action
     +span(4)
     +align(center)
     +vpadding(3,0)
     +corner
 
     span
-      +font($size*2)
+      +font(2)
 
     button
       +vmargin(2)
+
+  &-small

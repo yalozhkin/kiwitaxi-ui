@@ -32,32 +32,29 @@ block secondary
       +review
 
 block extra
-  .container
-    h3= home.stats.title
-    a(href= menu.secondary.feedback.url)= global.links.learnMore
+  h3= home.stats.title
+  a(href= menu.secondary.feedback.url)= global.links.learnMore
 
-    .grid
-      each item in home.stats.cases
-        figure
-          img(src= path.images.icons+"stats_"+item.name+".svg" alt= item.title)
-          figcaption
-            big= item.number
-            p= item.title
+  .grid
+    each item in home.stats.cases
+      figure
+        img(src= path.images.icons+"stats_"+item.name+".svg" alt= item.title)
+        figcaption
+          big= item.number
+          p= item.title
 
 block seo
-  .container
-    h3= home.seo.title
-    p= home.seo.content
+  h3= home.seo.title
+  p= home.seo.content
 
-  .container
-    h4 Geography
-    ul
-      each item in global.countries
-        li= item
+  h4 Geography
+  ul
+    each item in global.countries
+      li= item
 
-    h4 Airports
-    ul
-      - var n = 0
-      while n < 20
-        - n++
-        li= place.name
+  h4 Airports
+  ul
+    - var n = 0
+    while n < 20
+      - n++
+      li= place.name
