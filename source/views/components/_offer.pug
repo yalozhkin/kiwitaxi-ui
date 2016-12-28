@@ -1,3 +1,4 @@
+//- Big offer card with call to action
 mixin offer-full
   .offer
     .offer_vehicle
@@ -21,15 +22,16 @@ mixin offer-full
       span= offer.price+" USD"
       button Book transfer
 
+//- Small offer card
 mixin offer-small
-  .offer
-    .offer_vehicle
+  .offer-small
+    .vehicle
+      h3= vehicle.name
+
       figure
         picture
           source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")
           source(srcset= path.images.cars+vehicle.image+".png" type="image/jpeg")
           img(src= path.images.cars+vehicle.image+".png" alt= vehicle.name)
         figcaption
-          ul: li= vehicle.cars
-    .offer_details
-      h3= vehicle.name
+          p= offer.price

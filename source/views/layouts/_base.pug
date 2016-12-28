@@ -38,7 +38,7 @@ html(lang="en")
     link(rel="stylesheet" href= path.styles+"critical.css")
 
     //- Product scope styles
-    //- link(rel="stylesheet" href= path.styles+"components.css")
+    link(rel="stylesheet" href= path.styles+"components.css")
 
     //- Media styles
     link(rel="stylesheet" href= path.styles+"print.css" media="print")
@@ -65,7 +65,7 @@ html(lang="en")
       section
         block search
           //- Global search
-          include ../partials/_search.pug
+          +search-full
 
       section
         block breadcrumb

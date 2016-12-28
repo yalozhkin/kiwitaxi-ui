@@ -1,0 +1,17 @@
+// Mixin
+
+=input
+  +border($base-lighter)
+  +corner
+  +font
+  +padding(1)
+
+  &:focus
+    border: solid 1px lighten($green, 40%)
+    box-shadow: 0 0 4px lighten($green, 40%)
+    outline: 0
+
+// Instances
+
+input
+  +input

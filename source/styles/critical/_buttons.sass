@@ -1,0 +1,25 @@
+// Mixin
+
+=button($color: $base-subtle)
+  +border($color)
+  +corner
+  +font
+  +fill($color)
+  +padding(1)
+
+  &:hover
+    +fill($color: lighten($color, 10%))
+
+  &:active
+    +shadow(inset)
+
+  &:focus
+    outline: 0
+
+// Instances
+
+button
+  +button
+
+.btn-primary
+  +button($primary)
