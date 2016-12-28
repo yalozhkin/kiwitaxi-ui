@@ -11,7 +11,7 @@ block hero
 block main
   article
     h2= home.hiw.title
-    a(href= menu.about.url)= global.links.learnMore
+    a(href= menu.primary.about.url)= global.links.learnMore
 
     .grid
       each item in home.hiw.steps
@@ -26,7 +26,7 @@ block main
 block secondary
   article
     h2= home.feedback.title
-    a(href= menu.feedback.url)= global.links.showAll
+    a(href= menu.secondary.feedback.url)= global.links.showAll
 
     .grid
       +review
@@ -34,7 +34,7 @@ block secondary
 block extra
   .container
     h3= home.stats.title
-    a(href= menu.feedback.url)= global.links.learnMore
+    a(href= menu.secondary.feedback.url)= global.links.learnMore
 
     .grid
       each item in home.stats.cases
