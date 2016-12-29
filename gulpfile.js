@@ -117,29 +117,44 @@ var rasterOpt = lazypipe()
     }, {
       width: 300
     }],
-    'pics/*.png': [{
-      width: 600,
+    'covers/**/*.{jpg,png}': [{
       withoutEnlargement: false,
-      rename: {
-        suffix: '@2x'
-      }
-    }, {
-      width: 300
-    }],
-    'covers/*.png': [{
-      width: 1200,
+      width: 1600,
+      height: 600,
       format: 'jpeg',
       rename: {
-        suffix: '@2x',
+        suffix: '_hero@2x',
         extname: '.jpg'
       }
     }, {
+      withoutEnlargement: false,
       width: 800,
+      height: 300,
       format: 'jpeg',
       rename: {
+        suffix: '_hero',
+        extname: '.jpg'
+      }
+    }, {
+      withoutEnlargement: false,
+      width: 400,
+      height: 600,
+      format: 'jpeg',
+      rename: {
+        suffix: '_thumb@2x',
+        extname: '.jpg'
+      }
+    }, {
+      withoutEnlargement: false,
+      width: 200,
+      height: 300,
+      format: 'jpeg',
+      rename: {
+        suffix: '_thumb',
         extname: '.jpg'
       }
     }]
+
   }, {
     errorOnEnlargement: true,
     errorOnUnusedConfig: false,
@@ -158,21 +173,18 @@ var rasterOpt = lazypipe()
 var vectorOpt = lazypipe()
   .pipe(imagemin, {
     use: imageminSvgo({
-      plugins: [{
-        removeViewBox: false
-      }]
-    })
-    // .pipe(gzip)
+        plugins: [{
+          removeViewBox: false
+        }]
+      })
+      // .pipe(gzip)
   });
 
 gulp.task('webp', function() {
   var sink = clone.sink();
-  gulp.src(paths.src.images + '**/*.{png,jpg}')
+  gulp.src(paths.dest.images + '**/**/*.{png,jpg}')
     .pipe(plumber())
-    .pipe(cach('cached'))
-    .pipe(sink)
     .pipe(webp())
-    .pipe(sink.tap())
     .pipe(gulp.dest(paths.dest.images))
     .pipe(browserSync.stream());
 });
@@ -206,16 +218,16 @@ gulp.task('build', ['pug', 'sass', 'js', 'img']);
 
 gulp.task('server', function() {
   browserSync.init({
-      server: {
-        baseDir: paths.dest.root
-      },
-      open: false,
+    server: {
+      baseDir: paths.dest.root
+    },
+    open: false,
     // },
     // function(err, bs) {
     //   bs.addMiddleware('*', gzipMiddleware, {
     //     override: true
     //   });
-    });
+  });
 });
 
 // Default
