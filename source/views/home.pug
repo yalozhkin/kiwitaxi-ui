@@ -9,52 +9,61 @@ block hero
     p.lead= home.hero.lead
 
 block main
-  article
-    h2= home.hiw.title
-    a(href= menu.primary.about.url)= global.links.learnMore
+  article.hiw
+    header
+      h2= home.hiw.title
 
-    .grid
+    .grid.three
       each item in home.hiw.steps
-        figure
-          picture
-            source(srcset= path.images.pics+"hiw_"+item.name+".webp" type="image/webp")
-            source(srcset= path.images.pics+"hiw_"+item.name+".png" type="image/jpeg")
-            img(src= path.images.pics+"hiw_"+item.name+".png" alt= item.title)
+        figure.hiw__step
+          picture.hiw__step__pic
+            img(src= path.images.pics+"hiw_"+item.name+".svg" alt= item.title)
           figcaption
-            p= item.description
+            p= item.description + " "
+              a(href= menu.primary.about.url)= global.links.learnMore
 
 block secondary
-  article
-    h2= home.feedback.title
-    a(href= menu.secondary.feedback.url)= global.links.showAll
+  article.feedback
+    header
+      h2= home.feedback.title
 
     .grid
-      +review
+      - var n = 0
+      while n < 4
+        .card.gray
+          +review
+          - n++
+
+    footer
+      a(href= menu.secondary.feedback.url)= global.links.showAll
 
 block extra
-  h3= home.stats.title
-  a(href= menu.secondary.feedback.url)= global.links.learnMore
+  article.stats
+    h3= home.stats.title
+    a(href= menu.secondary.feedback.url)= global.links.learnMore
 
-  .grid
-    each item in home.stats.cases
-      figure
-        img(src= path.images.icons+"stats_"+item.name+".svg" alt= item.title)
-        figcaption
-          big= item.number
-          p= item.title
+    .grid.four
+      each item in home.stats.cases
+        figure
+          img(src= path.images.icons+"stats_"+item.name+".svg" alt= item.title)
+          figcaption
+            big= item.number
+            p= item.title
 
 block seo
-  h3= home.seo.title
-  p= home.seo.content
+  article.seo
+    h3= home.seo.title
+    p= home.seo.content
 
-  h4 Geography
-  ul
-    each item in global.countries
-      li= item
+  article.geography
+    h4 Geography
+    ul.grid.tight
+      each item in global.countries
+        li= item
 
-  h4 Airports
-  ul
-    - var n = 0
-    while n < 20
-      - n++
-      li= place.name
+    h4 Airports
+    ul.grid.tight
+      - var n = 0
+      while n < 20
+        - n++
+        li= place.name

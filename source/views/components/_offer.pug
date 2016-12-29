@@ -9,7 +9,7 @@ mixin offer
       figcaption
         ul: li= vehicle.cars
     .offer__details
-      h3= vehicle.name
+      .offer__vehicle= vehicle.name
       details
         summary= vehicle.details
         p= vehicle.description
@@ -23,7 +23,7 @@ mixin offer
 
 //- Small offer card
 mixin offer-small
-  .offer-small
+  .offer.offer-small
     figure
       picture.offer__pic
         source(srcset= path.images.cars+vehicle.image+".webp" type="image/webp")

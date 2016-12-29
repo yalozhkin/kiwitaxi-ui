@@ -5,19 +5,22 @@
 .navbar
   +fill($base)
   +valign
-  +padding(2,4)
-  +height(4)
+  +padding(0,4)
 
   &_logo img
     +pull(left)
-    +height(2)
-    height: $grid*4
-    max-width: none
+    height: 100%
+    max-width: $grid*16
+    min-width: $grid*12
 
   &_menu
     +inline
     +hmargin(3)
 
-    > li > a
-      +padding(0,2)
-      color: contrast-color($base)
+    > li
+      > a
+        +padding(2,2)
+        color: contrast-color($base)
+
+        &:hover
+          +fill($base-dark)

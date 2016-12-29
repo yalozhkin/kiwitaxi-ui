@@ -5,7 +5,11 @@ block data
       "images": {
         "root": "/assets/images/",
         "cars": "/assets/images/cars/",
-        "covers": "/assets/images/covers/",
+        "covers": {
+          "root":"/assets/images/covers/",
+          "country":"/assets/images/covers/country/",
+          "place":"/assets/images/covers/place/",
+        },
         "icons": "/assets/images/icons/",
         "pics": "/assets/images/pics/",
       },
@@ -76,7 +80,7 @@ html(lang="en")
         include ../partials/_search.pug
 
       block main
-      //- Main content  
+      //- Main content
 
     aside
       block aside

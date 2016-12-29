@@ -4,13 +4,29 @@
 
 .grid
   +squish(-1/6)
+  overflow: auto
+
+  > *
+    +span(3)
+
+    +breakpoint($desktop)
+      +span(3)
+
+    +breakpoint($laptop)
+      +span(3)
+
+    +breakpoint($tablet)
+      +span(4)
+
+    +breakpoint($mobile)
+      +span(12)
 
   &.comfort
     > *
       +span(4)
 
       +breakpoint($desktop)
-        +span(3)
+        +span(4)
 
       +breakpoint($laptop)
         +span(4)
@@ -23,7 +39,7 @@
 
   &.tight
     > *
-      +span(3)
+      +span(2)
 
       +breakpoint($desktop)
         +span(2)
@@ -36,3 +52,15 @@
 
       +breakpoint($mobile)
         +span(6)
+
+  &.two
+    > *
+      +span(6)
+
+  &.three
+    > *
+      +span(4)
+
+  &.four
+    > *
+      +span(3)

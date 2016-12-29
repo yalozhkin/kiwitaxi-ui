@@ -1,11 +1,16 @@
 mixin place
-  .place
-    a(href= path.root+menu.primary.place.url)
-      h4= place.name
-      p 25 destinations
+  a(href= path.root+menu.primary.place.url)
+    figure.place
+      picture.place__thumb
+        source(srcset= path.images.covers.place+place.image+"_thumb.webp" type="image/webp")
+        source(srcset= path.images.covers.place+place.image+"_thumb.jpg" type="image/jpeg")
+        img(src= path.images.covers.country+place.image+"_thumb.jpg" alt= place.name)
+      figcaption
+        .place__title= place.name
+        .place__details 25 destinations
 
 mixin place-price
   .place
     a(href= path.root+menu.primary.place.url)
-      h4= place.name
-      p= offer.price
+      .place__title= place.name
+      .place__details= offer.price

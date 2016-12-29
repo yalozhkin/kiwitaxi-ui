@@ -6,20 +6,19 @@ block title
 block heading
   h1= place.title
 
-block append search
-  .grid.tight
+block main
+  .grid.tight.is-scrollable
     - var n = 0
     while n < 6
       .card.is-clickable
         +offer-small
         - n++
 
-block main
-  h2= place.activity.title
-  .grid.comfort
+  h2= place.destinations.title
+  .grid.tight
     - var n = 0
-    while n < 6
-      .card.is-clickable
+    while n < 12
+      .card.zero.is-clickable
         +place
         - n++
 
